@@ -24,6 +24,7 @@ Además del catálogo de demos, el repositorio trae:
 | [`demos/aeropuerto/`](demos/aeropuerto/README.md) | Aeropuerto Forum: terminal aérea en 3D donde se provocan fallas para ver OT, CEP y APM de Zabbix 8.0 sobre datos simulados y trazas reales |
 | [`demos/tormenta/`](demos/tormenta/README.md) | Tormenta solar: central nucleoeléctrica y satélite en pixel art, por pisos; CEP encuentra la causa común entre el satélite, la red eléctrica, el reactor y el APM |
 | [`demos/estadio/`](demos/estadio/README.md) | Estadio Zabbix: noche de partido en pixel art, con tribuna, accesos, boletería, tienda del club, cartelería LED y sala eléctrica; CEP separa tres incidentes (apagón, base de entradas y tablero comercial) con su causa y sus síntomas |
+| [`demos/mall/`](demos/mall/README.md) | Plaza Zabbix: centro comercial en pixel art, con escaleras mecánicas, puertas automáticas, aire acondicionado, cámaras, estacionamiento y generador; CEP separa cuatro incidentes (apagón, chiller, red de seguridad y escalera) con su causa y sus síntomas |
 
 ## Agregar otra demo
 

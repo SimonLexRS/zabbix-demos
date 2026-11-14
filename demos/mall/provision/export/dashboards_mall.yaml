@@ -1,0 +1,5333 @@
+zabbix_export:
+  version: '8.0'
+  dashboards:
+    - name: 'Mall · Operación e infraestructura'
+      pages:
+        - name: 'Clima y energía'
+          widgets:
+            - type: gauge
+              name: 'Nivel 2'
+              width: '12'
+              height: '5'
+              hide_header: 'YES'
+              fields:
+                - type: INTEGER
+                  name: angle
+                  value: '180'
+                - type: INTEGER
+                  name: decimal_places
+                  value: '1'
+                - type: STRING
+                  name: description
+                  value: 'Nivel 2'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '12'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Clima'
+                    key: 'mall.clima.temperatura[n2]'
+                - type: STRING
+                  name: max
+                  value: '32'
+                - type: STRING
+                  name: min
+                  value: '18'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '3'
+                - type: INTEGER
+                  name: show.3
+                  value: '4'
+                - type: INTEGER
+                  name: show.4
+                  value: '5'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '25'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '26'
+                - type: INTEGER
+                  name: th_arc_size
+                  value: '8'
+                - type: INTEGER
+                  name: th_show_arc
+                  value: '1'
+                - type: INTEGER
+                  name: th_show_labels
+                  value: '0'
+                - type: INTEGER
+                  name: units_size
+                  value: '14'
+                - type: INTEGER
+                  name: value_arc_size
+                  value: '20'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '22'
+            - type: honeycomb
+              name: 'Estado de energía y clima'
+              'y': '5'
+              width: '24'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Mall/Infraestructura
+                - type: STRING
+                  name: items.0
+                  value: 'Energía: suministro de la red externa'
+                - type: STRING
+                  name: items.1
+                  value: 'Chiller *: en marcha'
+                - type: STRING
+                  name: items.2
+                  value: 'Puerta *: en automático'
+                - type: STRING
+                  name: primary_label
+                  value: '{ITEM.NAME}'
+                - type: INTEGER
+                  name: primary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: primary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: primary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: primary_label_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: secondary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: secondary_label_decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_type
+                  value: '1'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+            - type: topitems
+              name: 'Temperatura por nivel'
+              'y': '11'
+              width: '24'
+              height: '5'
+              fields:
+                - type: INTEGER
+                  name: columns.0.decimal_places
+                  value: '2'
+                - type: INTEGER
+                  name: columns.0.display
+                  value: '2'
+                - type: STRING
+                  name: columns.0.items.0
+                  value: '*: temperatura'
+                - type: STRING
+                  name: columns.0.max
+                  value: '32'
+                - type: STRING
+                  name: columns.0.min
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: columns.0.thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: columns.0.thresholds.1.threshold
+                  value: '25'
+                - type: STRING
+                  name: columns.0.thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: columns.0.thresholds.2.threshold
+                  value: '26'
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Mall/Infraestructura
+                - type: INTEGER
+                  name: item_ordering_limit
+                  value: '10'
+                - type: INTEGER
+                  name: item_ordering_order
+                  value: '2'
+                - type: INTEGER
+                  name: item_ordering_order_by
+                  value: '2'
+                - type: INTEGER
+                  name: layout
+                  value: '1'
+                - type: INTEGER
+                  name: show_column_header
+                  value: '0'
+            - type: gauge
+              name: 'Agua helada'
+              x: '12'
+              width: '12'
+              height: '5'
+              hide_header: 'YES'
+              fields:
+                - type: INTEGER
+                  name: angle
+                  value: '180'
+                - type: INTEGER
+                  name: decimal_places
+                  value: '1'
+                - type: STRING
+                  name: description
+                  value: 'Agua helada'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '12'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Clima'
+                    key: mall.clima.agua_helada
+                - type: STRING
+                  name: max
+                  value: '16'
+                - type: STRING
+                  name: min
+                  value: '0'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '3'
+                - type: INTEGER
+                  name: show.3
+                  value: '4'
+                - type: INTEGER
+                  name: show.4
+                  value: '5'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '8'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '10'
+                - type: INTEGER
+                  name: th_arc_size
+                  value: '8'
+                - type: INTEGER
+                  name: th_show_arc
+                  value: '1'
+                - type: INTEGER
+                  name: th_show_labels
+                  value: '0'
+                - type: INTEGER
+                  name: units_size
+                  value: '14'
+                - type: INTEGER
+                  name: value_arc_size
+                  value: '20'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '22'
+            - type: gauge
+              name: 'Chiller 1'
+              x: '24'
+              width: '12'
+              height: '5'
+              hide_header: 'YES'
+              fields:
+                - type: INTEGER
+                  name: angle
+                  value: '180'
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: STRING
+                  name: description
+                  value: 'Chiller 1'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '12'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Clima'
+                    key: 'mall.clima.chiller.corriente[1]'
+                - type: STRING
+                  name: max
+                  value: '240'
+                - type: STRING
+                  name: min
+                  value: '0'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '3'
+                - type: INTEGER
+                  name: show.3
+                  value: '4'
+                - type: INTEGER
+                  name: show.4
+                  value: '5'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '60'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '160'
+                - type: STRING
+                  name: thresholds.3.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.3.threshold
+                  value: '180'
+                - type: INTEGER
+                  name: th_arc_size
+                  value: '8'
+                - type: INTEGER
+                  name: th_show_arc
+                  value: '1'
+                - type: INTEGER
+                  name: th_show_labels
+                  value: '0'
+                - type: INTEGER
+                  name: units_size
+                  value: '14'
+                - type: INTEGER
+                  name: value_arc_size
+                  value: '20'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '22'
+            - type: svggraph
+              name: 'Temperatura por nivel'
+              x: '24'
+              'y': '5'
+              width: '24'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Planta baja: temperatura'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Nivel 1: temperatura'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'Nivel 2: temperatura'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '20'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - *'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: svggraph
+              name: 'Agua helada'
+              x: '24'
+              'y': '11'
+              width: '24'
+              height: '5'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Aire acondicionado: temperatura del agua helada'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - Clima'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: gauge
+              name: 'Chiller 2'
+              x: '36'
+              width: '12'
+              height: '5'
+              hide_header: 'YES'
+              fields:
+                - type: INTEGER
+                  name: angle
+                  value: '180'
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: STRING
+                  name: description
+                  value: 'Chiller 2'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '12'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Clima'
+                    key: 'mall.clima.chiller.corriente[2]'
+                - type: STRING
+                  name: max
+                  value: '240'
+                - type: STRING
+                  name: min
+                  value: '0'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '3'
+                - type: INTEGER
+                  name: show.3
+                  value: '4'
+                - type: INTEGER
+                  name: show.4
+                  value: '5'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '60'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '160'
+                - type: STRING
+                  name: thresholds.3.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.3.threshold
+                  value: '180'
+                - type: INTEGER
+                  name: th_arc_size
+                  value: '8'
+                - type: INTEGER
+                  name: th_show_arc
+                  value: '1'
+                - type: INTEGER
+                  name: th_show_labels
+                  value: '0'
+                - type: INTEGER
+                  name: units_size
+                  value: '14'
+                - type: INTEGER
+                  name: value_arc_size
+                  value: '20'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '22'
+            - type: gauge
+              name: 'UPS: batería'
+              x: '48'
+              width: '12'
+              height: '5'
+              hide_header: 'YES'
+              fields:
+                - type: INTEGER
+                  name: angle
+                  value: '180'
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: STRING
+                  name: description
+                  value: 'UPS: batería'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '12'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Energia'
+                    key: mall.ups.bateria_pct
+                - type: STRING
+                  name: max
+                  value: '100'
+                - type: STRING
+                  name: min
+                  value: '0'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '3'
+                - type: INTEGER
+                  name: show.3
+                  value: '4'
+                - type: INTEGER
+                  name: show.4
+                  value: '5'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '30'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '60'
+                - type: INTEGER
+                  name: th_arc_size
+                  value: '8'
+                - type: INTEGER
+                  name: th_show_arc
+                  value: '1'
+                - type: INTEGER
+                  name: th_show_labels
+                  value: '0'
+                - type: INTEGER
+                  name: units_size
+                  value: '14'
+                - type: INTEGER
+                  name: value_arc_size
+                  value: '20'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '22'
+            - type: svggraph
+              name: 'Corriente de los chillers'
+              x: '48'
+              'y': '5'
+              width: '24'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Chiller 1: corriente'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Chiller 2: corriente'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - Clima'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: svggraph
+              name: 'Potencia consumida'
+              x: '48'
+              'y': '11'
+              width: '24'
+              height: '5'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: E87BA4
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Energia'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Energía: potencia consumida'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - Energia'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: gauge
+              name: 'Generador: combustible'
+              x: '60'
+              width: '12'
+              height: '5'
+              hide_header: 'YES'
+              fields:
+                - type: INTEGER
+                  name: angle
+                  value: '180'
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: STRING
+                  name: description
+                  value: 'Generador: combustible'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '12'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Energia'
+                    key: mall.gen.combustible_pct
+                - type: STRING
+                  name: max
+                  value: '100'
+                - type: STRING
+                  name: min
+                  value: '0'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '3'
+                - type: INTEGER
+                  name: show.3
+                  value: '4'
+                - type: INTEGER
+                  name: show.4
+                  value: '5'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '25'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '50'
+                - type: INTEGER
+                  name: th_arc_size
+                  value: '8'
+                - type: INTEGER
+                  name: th_show_arc
+                  value: '1'
+                - type: INTEGER
+                  name: th_show_labels
+                  value: '0'
+                - type: INTEGER
+                  name: units_size
+                  value: '14'
+                - type: INTEGER
+                  name: value_arc_size
+                  value: '20'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '22'
+        - name: 'Escaleras y puertas'
+          widgets:
+            - type: item
+              name: 'Escaleras en marcha'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Escaleras en marcha'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Escaleras'
+                    key: mall.escalera.en_marcha_total
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '2'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '4'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Temperatura de los motores'
+              'y': '3'
+              width: '26'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Escalera 1: temperatura del motor'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Escalera 2: temperatura del motor'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'Escalera 3: temperatura del motor'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: ds.3.color
+                  value: EDA100
+                - type: INTEGER
+                  name: ds.3.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.3.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.3.items.0
+                  value: 'Escalera 4: temperatura del motor'
+                - type: INTEGER
+                  name: ds.3.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.3.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.3.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.3.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - Escaleras'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: topitems
+              name: 'Pasajeros por minuto'
+              'y': '9'
+              width: '24'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: columns.0.decimal_places
+                  value: '2'
+                - type: INTEGER
+                  name: columns.0.display
+                  value: '2'
+                - type: STRING
+                  name: columns.0.items.0
+                  value: 'Escalera *: pasajeros por minuto'
+                - type: STRING
+                  name: columns.0.max
+                  value: '80'
+                - type: STRING
+                  name: columns.0.min
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.0.color
+                  value: 37474F
+                - type: STRING
+                  name: columns.0.thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: columns.0.thresholds.1.threshold
+                  value: '55'
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Mall/Infraestructura
+                - type: INTEGER
+                  name: item_ordering_limit
+                  value: '10'
+                - type: INTEGER
+                  name: item_ordering_order
+                  value: '2'
+                - type: INTEGER
+                  name: item_ordering_order_by
+                  value: '2'
+                - type: INTEGER
+                  name: layout
+                  value: '1'
+                - type: INTEGER
+                  name: show_column_header
+                  value: '0'
+            - type: item
+              name: 'Motor de la escalera 2'
+              x: '12'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Motor de la escalera 2'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Escaleras'
+                    key: 'mall.escalera.motor[2]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '75'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '85'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: item
+              name: 'Vibración de la escalera 2'
+              x: '24'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '1'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Vibración de la escalera 2'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Escaleras'
+                    key: 'mall.escalera.vibracion[2]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '4'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '6'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: piechart
+              name: 'Reparto de pasajeros (por minuto)'
+              x: '24'
+              'y': '9'
+              width: '22'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: draw_type
+                  value: '1'
+                - type: INTEGER
+                  name: ds.0.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.0.data_set_label
+                  value: 'Escalera 1'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Escalera 1: pasajeros por minuto'
+                - type: INTEGER
+                  name: ds.1.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.1.data_set_label
+                  value: 'Escalera 2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Escalera 2: pasajeros por minuto'
+                - type: INTEGER
+                  name: ds.2.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.2.data_set_label
+                  value: 'Escalera 3'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'Escalera 3: pasajeros por minuto'
+                - type: INTEGER
+                  name: ds.3.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.3.color
+                  value: EDA100
+                - type: INTEGER
+                  name: ds.3.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.3.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.3.data_set_label
+                  value: 'Escalera 4'
+                - type: STRING
+                  name: ds.3.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.3.items.0
+                  value: 'Escalera 4: pasajeros por minuto'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '2'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '2'
+                - type: INTEGER
+                  name: space
+                  value: '2'
+                - type: STRING
+                  name: time_period.from
+                  value: now-5m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+                - type: INTEGER
+                  name: total_show
+                  value: '1'
+                - type: STRING
+                  name: units
+                  value: ''
+                - type: INTEGER
+                  name: units_show
+                  value: '0'
+                - type: INTEGER
+                  name: value_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: width
+                  value: '40'
+            - type: svggraph
+              name: Vibración
+              x: '26'
+              'y': '3'
+              width: '24'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Escalera 1: vibración'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Escalera 2: vibración'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'Escalera 3: vibración'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: ds.3.color
+                  value: EDA100
+                - type: INTEGER
+                  name: ds.3.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.3.hosts.0
+                  value: 'Mall - Escaleras'
+                - type: STRING
+                  name: ds.3.items.0
+                  value: 'Escalera 4: vibración'
+                - type: INTEGER
+                  name: ds.3.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.3.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.3.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.3.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: item
+              name: 'Pasajeros en la escalera 1'
+              x: '36'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Pasajeros en la escalera 1'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Escaleras'
+                    key: 'mall.escalera.pasajeros[1]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 37474F
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '55'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Puertas: ciclos por minuto'
+              x: '46'
+              'y': '9'
+              width: '26'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Puertas'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Puerta norte: ciclos por minuto'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Puertas'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Puerta sur: ciclos por minuto'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'Mall - Puertas'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'Puerta estacionamiento: ciclos por minuto'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - Puertas'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: item
+              name: 'Puertas en automático'
+              x: '48'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Puertas en automático'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Puertas'
+                    key: mall.puerta.automaticas
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '3'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: honeycomb
+              name: 'Escaleras en marcha'
+              x: '50'
+              'y': '3'
+              width: '22'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Mall/Infraestructura
+                - type: STRING
+                  name: items.0
+                  value: 'Escalera *: en marcha'
+                - type: STRING
+                  name: primary_label
+                  value: '{ITEM.NAME}'
+                - type: INTEGER
+                  name: primary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: primary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: primary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: primary_label_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: secondary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: secondary_label_decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_type
+                  value: '1'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+            - type: item
+              name: Iluminación
+              x: '60'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: Iluminación
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Energia'
+                    key: mall.luz.nivel_pct
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '60'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+        - name: 'Seguridad y estacionamiento'
+          widgets:
+            - type: item
+              name: 'Cámaras en línea'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Cámaras en línea'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Seguridad'
+                    key: mall.seg.camaras
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '40'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '48'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Cámaras en línea'
+              'y': '3'
+              width: '26'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Seguridad'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Seguridad: cámaras en línea'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - *'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: scatterplot
+              name: 'Fila en la salida vs. latencia de la salida (p95)'
+              'y': '9'
+              width: '22'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: ds.0.aggregate_function
+                  value: '2'
+                - type: STRING
+                  name: ds.0.aggregate_interval
+                  value: 30s
+                - type: INTEGER
+                  name: ds.0.color_palette
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.dataset_type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.marker
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.marker_size
+                  value: '2'
+                - type: STRING
+                  name: ds.0.timeshift
+                  value: ''
+                - type: ITEM
+                  name: ds.0.x_axis_itemids.0
+                  value:
+                    host: 'Mall - Estacionamiento'
+                    key: mall.parking.fila_salida
+                - type: STRING
+                  name: ds.0.x_axis_references.0
+                  value: ''
+                - type: ITEM
+                  name: ds.0.y_axis_itemids.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: mall.apm.estacionamiento.p95
+                - type: STRING
+                  name: ds.0.y_axis_references.0
+                  value: ''
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+                - type: STRING
+                  name: x_axis_static_units
+                  value: autos
+                - type: INTEGER
+                  name: x_axis_units
+                  value: '1'
+                - type: STRING
+                  name: y_axis_static_units
+                  value: s
+                - type: INTEGER
+                  name: y_axis_units
+                  value: '1'
+            - type: item
+              name: 'Switch PoE'
+              x: '12'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Switch PoE'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Seguridad'
+                    key: mall.seg.switch
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Autos en la fila de salida'
+              x: '22'
+              'y': '9'
+              width: '28'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Estacionamiento'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Estacionamiento: autos en la fila de salida'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - Estacionamiento'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: item
+              name: Grabación
+              x: '24'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: Grabación
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Seguridad'
+                    key: mall.seg.nvr_grabando
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Salidas del estacionamiento por minuto'
+              x: '26'
+              'y': '3'
+              width: '24'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: ds.0.aggregate_function
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.aggregate_grouping
+                  value: '0'
+                - type: STRING
+                  name: ds.0.aggregate_interval
+                  value: 1m
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '6'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Negocio'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'APM estacionamiento: operaciones por minuto'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: item
+              name: 'Lectura de placas'
+              x: '36'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Lectura de placas'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Seguridad'
+                    key: mall.seg.lpr
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: item
+              name: 'Autos en la salida'
+              x: '48'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Autos en la salida'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Estacionamiento'
+                    key: mall.parking.fila_salida
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '5'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '8'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: gauge
+              name: 'Ocupación del estacionamiento'
+              x: '50'
+              'y': '3'
+              width: '22'
+              height: '6'
+              hide_header: 'YES'
+              fields:
+                - type: INTEGER
+                  name: angle
+                  value: '180'
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: STRING
+                  name: description
+                  value: 'Ocupación del estacionamiento'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '12'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Estacionamiento'
+                    key: mall.parking.ocupacion_pct
+                - type: STRING
+                  name: max
+                  value: '100'
+                - type: STRING
+                  name: min
+                  value: '0'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '3'
+                - type: INTEGER
+                  name: show.3
+                  value: '4'
+                - type: INTEGER
+                  name: show.4
+                  value: '5'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '85'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '95'
+                - type: INTEGER
+                  name: th_arc_size
+                  value: '8'
+                - type: INTEGER
+                  name: th_show_arc
+                  value: '1'
+                - type: INTEGER
+                  name: th_show_labels
+                  value: '0'
+                - type: INTEGER
+                  name: units_size
+                  value: '14'
+                - type: INTEGER
+                  name: value_arc_size
+                  value: '20'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '22'
+            - type: problems
+              name: 'Problemas de seguridad y estacionamiento'
+              x: '50'
+              'y': '9'
+              width: '22'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: evaltype
+                  value: '0'
+                - type: INTEGER
+                  name: highlight_row
+                  value: '1'
+                - type: INTEGER
+                  name: severities.0
+                  value: '2'
+                - type: INTEGER
+                  name: severities.1
+                  value: '3'
+                - type: INTEGER
+                  name: severities.2
+                  value: '4'
+                - type: INTEGER
+                  name: severities.3
+                  value: '5'
+                - type: INTEGER
+                  name: show
+                  value: '3'
+                - type: INTEGER
+                  name: show_lines
+                  value: '12'
+                - type: INTEGER
+                  name: show_tags
+                  value: '3'
+                - type: INTEGER
+                  name: show_timeline
+                  value: '1'
+                - type: INTEGER
+                  name: sort_triggers
+                  value: '4'
+                - type: INTEGER
+                  name: tags.0.operator
+                  value: '1'
+                - type: STRING
+                  name: tags.0.tag
+                  value: demo
+                - type: STRING
+                  name: tags.0.value
+                  value: mall
+                - type: INTEGER
+                  name: tag_name_format
+                  value: '0'
+            - type: item
+              name: 'Salidas hoy'
+              x: '60'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Salidas hoy'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: 'mall.kpi[salidas_hoy]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 37474F
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+        - name: 'Servicios y APM'
+          widgets:
+            - type: item
+              name: 'Salidas hoy'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Salidas hoy'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: 'mall.kpi[salidas_hoy]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 37474F
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Latencia p95 por servicio'
+              'y': '3'
+              width: '30'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'APM estacionamiento: Latency p95'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'APM lpr: Latency p95'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'APM giftcards: Latency p95'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: ds.3.color
+                  value: EDA100
+                - type: INTEGER
+                  name: ds.3.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.3.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.3.items.0
+                  value: 'APM caja: Latency p95'
+                - type: INTEGER
+                  name: ds.3.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.3.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.3.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.3.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: topitems
+              name: 'Latencia p95'
+              'y': '9'
+              width: '26'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: columns.0.decimal_places
+                  value: '2'
+                - type: INTEGER
+                  name: columns.0.display
+                  value: '2'
+                - type: STRING
+                  name: columns.0.items.0
+                  value: 'APM estacionamiento: Latency p95'
+                - type: STRING
+                  name: columns.0.items.1
+                  value: 'APM lpr: Latency p95'
+                - type: STRING
+                  name: columns.0.items.2
+                  value: 'APM giftcards: Latency p95'
+                - type: STRING
+                  name: columns.0.items.3
+                  value: 'APM caja: Latency p95'
+                - type: STRING
+                  name: columns.0.max
+                  value: '2'
+                - type: STRING
+                  name: columns.0.min
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: columns.0.thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: columns.0.thresholds.1.threshold
+                  value: '0.6'
+                - type: STRING
+                  name: columns.0.thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: columns.0.thresholds.2.threshold
+                  value: '1.2'
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Applications
+                - type: INTEGER
+                  name: item_ordering_limit
+                  value: '10'
+                - type: INTEGER
+                  name: item_ordering_order
+                  value: '2'
+                - type: INTEGER
+                  name: item_ordering_order_by
+                  value: '2'
+                - type: INTEGER
+                  name: layout
+                  value: '1'
+                - type: INTEGER
+                  name: show_column_header
+                  value: '0'
+            - type: item
+              name: 'Recaudación del estacionamiento'
+              x: '12'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Recaudación del estacionamiento'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: 'mall.kpi[recaudacion_estacionamiento_hoy]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 37474F
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: item
+              name: 'Tarjetas de regalo hoy'
+              x: '24'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Tarjetas de regalo hoy'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: 'mall.kpi[tarjetas_hoy]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 37474F
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: topitems
+              name: Apdex
+              x: '26'
+              'y': '9'
+              width: '26'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: columns.0.decimal_places
+                  value: '2'
+                - type: INTEGER
+                  name: columns.0.display
+                  value: '2'
+                - type: STRING
+                  name: columns.0.items.0
+                  value: 'APM estacionamiento: Apdex'
+                - type: STRING
+                  name: columns.0.items.1
+                  value: 'APM lpr: Apdex'
+                - type: STRING
+                  name: columns.0.items.2
+                  value: 'APM giftcards: Apdex'
+                - type: STRING
+                  name: columns.0.items.3
+                  value: 'APM caja: Apdex'
+                - type: STRING
+                  name: columns.0.max
+                  value: '1'
+                - type: STRING
+                  name: columns.0.min
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: columns.0.thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: columns.0.thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: columns.0.thresholds.1.threshold
+                  value: '0.7'
+                - type: STRING
+                  name: columns.0.thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: columns.0.thresholds.2.threshold
+                  value: '0.85'
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Applications
+                - type: INTEGER
+                  name: item_ordering_limit
+                  value: '10'
+                - type: INTEGER
+                  name: item_ordering_order
+                  value: '2'
+                - type: INTEGER
+                  name: item_ordering_order_by
+                  value: '2'
+                - type: INTEGER
+                  name: layout
+                  value: '1'
+                - type: INTEGER
+                  name: show_column_header
+                  value: '0'
+            - type: svggraph
+              name: 'Tasa de errores por servicio'
+              x: '30'
+              'y': '3'
+              width: '22'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'APM estacionamiento: Error rate'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'APM lpr: Error rate'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'APM giftcards: Error rate'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: ds.3.color
+                  value: EDA100
+                - type: INTEGER
+                  name: ds.3.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.3.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.3.items.0
+                  value: 'APM caja: Error rate'
+                - type: INTEGER
+                  name: ds.3.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.3.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.3.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.3.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: item
+              name: 'Salidas fallidas (15 min)'
+              x: '36'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Salidas fallidas (15 min)'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: 'mall.kpi[salidas_fallidas_15m]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '20'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: item
+              name: 'Salida p95'
+              x: '48'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '2'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Salida p95'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: mall.apm.estacionamiento.p95
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '0.6'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '1.2'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: honeycomb
+              name: 'Salud de los servicios'
+              x: '52'
+              'y': '3'
+              width: '20'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Applications
+                - type: STRING
+                  name: items.0
+                  value: 'APM estacionamiento: Health'
+                - type: STRING
+                  name: items.1
+                  value: 'APM lpr: Health'
+                - type: STRING
+                  name: items.2
+                  value: 'APM giftcards: Health'
+                - type: STRING
+                  name: items.3
+                  value: 'APM caja: Health'
+                - type: STRING
+                  name: primary_label
+                  value: '{ITEM.NAME}'
+                - type: INTEGER
+                  name: primary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: primary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: primary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: primary_label_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: secondary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: secondary_label_decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_type
+                  value: '1'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '2'
+            - type: piechart
+              name: '¿Dónde se va el tiempo de una salida?'
+              x: '52'
+              'y': '9'
+              width: '20'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: draw_type
+                  value: '1'
+                - type: INTEGER
+                  name: ds.0.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.0.data_set_label
+                  value: Estacionamiento
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'APM estacionamiento POST /salida: Time in own code'
+                - type: INTEGER
+                  name: ds.1.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.1.data_set_label
+                  value: 'Otros servicios'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'APM estacionamiento POST /salida: Time in other services'
+                - type: INTEGER
+                  name: ds.2.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.2.data_set_label
+                  value: 'Bases de datos'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'APM estacionamiento POST /salida: Time in databases'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '2'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '2'
+                - type: INTEGER
+                  name: space
+                  value: '2'
+                - type: STRING
+                  name: time_period.from
+                  value: now-5m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+                - type: INTEGER
+                  name: total_show
+                  value: '1'
+                - type: STRING
+                  name: units
+                  value: '%'
+                - type: INTEGER
+                  name: units_show
+                  value: '1'
+                - type: INTEGER
+                  name: value_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: width
+                  value: '40'
+            - type: item
+              name: 'Errores en la salida'
+              x: '60'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '1'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Errores en la salida'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: mall.apm.estacionamiento.error_pct
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '5'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '20'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+    - name: 'Tablero ejecutivo · Mall'
+      pages:
+        - name: 'Negocio, operación y APM'
+          widgets:
+            - type: item
+              name: Visitantes
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: Visitantes
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: mall.negocio.visitantes
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 37474F
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Temperatura por nivel'
+              'y': '3'
+              width: '26'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Planta baja: temperatura'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Nivel 1: temperatura'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'Mall - Clima'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'Nivel 2: temperatura'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '20'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: problemhosts.0
+                  value: 'Mall - *'
+                - type: INTEGER
+                  name: show_problems
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: problems
+              name: 'Qué está pasando: causa y síntomas'
+              'y': '9'
+              width: '38'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: evaltype
+                  value: '0'
+                - type: INTEGER
+                  name: highlight_row
+                  value: '1'
+                - type: INTEGER
+                  name: severities.0
+                  value: '2'
+                - type: INTEGER
+                  name: severities.1
+                  value: '3'
+                - type: INTEGER
+                  name: severities.2
+                  value: '4'
+                - type: INTEGER
+                  name: severities.3
+                  value: '5'
+                - type: INTEGER
+                  name: show
+                  value: '3'
+                - type: INTEGER
+                  name: show_lines
+                  value: '12'
+                - type: INTEGER
+                  name: show_tags
+                  value: '3'
+                - type: INTEGER
+                  name: show_timeline
+                  value: '1'
+                - type: INTEGER
+                  name: sort_triggers
+                  value: '4'
+                - type: INTEGER
+                  name: tags.0.operator
+                  value: '1'
+                - type: STRING
+                  name: tags.0.tag
+                  value: demo
+                - type: STRING
+                  name: tags.0.value
+                  value: mall
+                - type: INTEGER
+                  name: tag_name_format
+                  value: '0'
+            - type: item
+              name: 'Ventas por hora'
+              x: '12'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Ventas por hora'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Negocio'
+                    key: mall.negocio.ventas_h
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '300000'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '500000'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: item
+              name: 'Temperatura en nivel 2'
+              x: '24'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '1'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Temperatura en nivel 2'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Clima'
+                    key: 'mall.clima.temperatura[n2]'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '25'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '26'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: svggraph
+              name: 'Latencia p95 por servicio'
+              x: '26'
+              'y': '3'
+              width: '24'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'APM estacionamiento: Latency p95'
+                - type: INTEGER
+                  name: ds.0.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.0.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.0.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.width
+                  value: '2'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'APM lpr: Latency p95'
+                - type: INTEGER
+                  name: ds.1.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.1.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.1.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.width
+                  value: '2'
+                - type: STRING
+                  name: ds.2.color
+                  value: 1BAF7A
+                - type: INTEGER
+                  name: ds.2.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.2.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.2.items.0
+                  value: 'APM giftcards: Latency p95'
+                - type: INTEGER
+                  name: ds.2.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.2.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.2.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.2.width
+                  value: '2'
+                - type: STRING
+                  name: ds.3.color
+                  value: EDA100
+                - type: INTEGER
+                  name: ds.3.fill
+                  value: '2'
+                - type: STRING
+                  name: ds.3.hosts.0
+                  value: 'APM mall*'
+                - type: STRING
+                  name: ds.3.items.0
+                  value: 'APM caja: Latency p95'
+                - type: INTEGER
+                  name: ds.3.pointsize
+                  value: '3'
+                - type: INTEGER
+                  name: ds.3.transparency
+                  value: '4'
+                - type: INTEGER
+                  name: ds.3.type
+                  value: '0'
+                - type: INTEGER
+                  name: ds.3.width
+                  value: '2'
+                - type: STRING
+                  name: lefty_min
+                  value: '0'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '3'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '1'
+                - type: STRING
+                  name: time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+            - type: item
+              name: 'Escaleras en marcha'
+              x: '36'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Escaleras en marcha'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Escaleras'
+                    key: mall.escalera.en_marcha_total
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '2'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '4'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: problemsbysv
+              name: 'Por severidad'
+              x: '38'
+              'y': '9'
+              width: '12'
+              height: '6'
+              fields:
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Mall/Infraestructura
+                - type: GROUP
+                  name: groupids.1
+                  value:
+                    name: Mall/Seguridad
+                - type: GROUP
+                  name: groupids.2
+                  value:
+                    name: Mall/Negocio
+                - type: INTEGER
+                  name: layout
+                  value: '1'
+                - type: INTEGER
+                  name: severities.0
+                  value: '2'
+                - type: INTEGER
+                  name: severities.1
+                  value: '3'
+                - type: INTEGER
+                  name: severities.2
+                  value: '4'
+                - type: INTEGER
+                  name: severities.3
+                  value: '5'
+                - type: INTEGER
+                  name: show_type
+                  value: '1'
+            - type: item
+              name: 'Cámaras en línea'
+              x: '48'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Cámaras en línea'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Seguridad'
+                    key: mall.seg.camaras
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '40'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '48'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
+            - type: honeycomb
+              name: 'Salud de los servicios'
+              x: '50'
+              'y': '3'
+              width: '22'
+              height: '6'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: GROUP
+                  name: groupids.0
+                  value:
+                    name: Applications
+                - type: STRING
+                  name: items.0
+                  value: 'APM estacionamiento: Health'
+                - type: STRING
+                  name: items.1
+                  value: 'APM lpr: Health'
+                - type: STRING
+                  name: items.2
+                  value: 'APM giftcards: Health'
+                - type: STRING
+                  name: items.3
+                  value: 'APM caja: Health'
+                - type: STRING
+                  name: primary_label
+                  value: '{ITEM.NAME}'
+                - type: INTEGER
+                  name: primary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: primary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: primary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: primary_label_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_bold
+                  value: '1'
+                - type: STRING
+                  name: secondary_label_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: secondary_label_decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: secondary_label_type
+                  value: '1'
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '1'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '2'
+            - type: piechart
+              name: 'Recaudación de hoy (MXN)'
+              x: '50'
+              'y': '9'
+              width: '22'
+              height: '6'
+              fields:
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: draw_type
+                  value: '1'
+                - type: INTEGER
+                  name: ds.0.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.0.color
+                  value: 2A78D6
+                - type: INTEGER
+                  name: ds.0.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.0.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.0.data_set_label
+                  value: Estacionamiento
+                - type: STRING
+                  name: ds.0.hosts.0
+                  value: 'Mall - Negocio'
+                - type: STRING
+                  name: ds.0.items.0
+                  value: 'Negocio: recaudación del estacionamiento hoy'
+                - type: INTEGER
+                  name: ds.1.aggregate_function
+                  value: '7'
+                - type: STRING
+                  name: ds.1.color
+                  value: EB6834
+                - type: INTEGER
+                  name: ds.1.dataset_aggregation
+                  value: '0'
+                - type: INTEGER
+                  name: ds.1.dataset_type
+                  value: '1'
+                - type: STRING
+                  name: ds.1.data_set_label
+                  value: 'Tarjetas de regalo'
+                - type: STRING
+                  name: ds.1.hosts.0
+                  value: 'Mall - Negocio'
+                - type: STRING
+                  name: ds.1.items.0
+                  value: 'Negocio: recaudación de tarjetas de regalo hoy'
+                - type: INTEGER
+                  name: legend
+                  value: '1'
+                - type: INTEGER
+                  name: legend_columns
+                  value: '2'
+                - type: INTEGER
+                  name: legend_lines
+                  value: '2'
+                - type: INTEGER
+                  name: space
+                  value: '2'
+                - type: STRING
+                  name: time_period.from
+                  value: now-5m
+                - type: STRING
+                  name: time_period.to
+                  value: now
+                - type: INTEGER
+                  name: total_show
+                  value: '1'
+                - type: STRING
+                  name: units
+                  value: ''
+                - type: INTEGER
+                  name: units_show
+                  value: '0'
+                - type: INTEGER
+                  name: value_size_type
+                  value: '0'
+                - type: INTEGER
+                  name: width
+                  value: '40'
+            - type: item
+              name: 'Autos en la salida'
+              x: '60'
+              width: '12'
+              height: '3'
+              hide_header: 'YES'
+              fields:
+                - type: STRING
+                  name: bg_color
+                  value: 37474F
+                - type: INTEGER
+                  name: decimal_places
+                  value: '0'
+                - type: INTEGER
+                  name: decimal_size
+                  value: '20'
+                - type: STRING
+                  name: description
+                  value: 'Autos en la salida'
+                - type: INTEGER
+                  name: desc_bold
+                  value: '1'
+                - type: STRING
+                  name: desc_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: desc_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: desc_size
+                  value: '13'
+                - type: INTEGER
+                  name: desc_v_pos
+                  value: '0'
+                - type: ITEM
+                  name: itemid.0
+                  value:
+                    host: 'Mall - Estacionamiento'
+                    key: mall.parking.fila_salida
+                - type: INTEGER
+                  name: show.0
+                  value: '1'
+                - type: INTEGER
+                  name: show.1
+                  value: '2'
+                - type: INTEGER
+                  name: show.2
+                  value: '5'
+                - type: STRING
+                  name: sparkline.color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: sparkline.fill
+                  value: '2'
+                - type: STRING
+                  name: sparkline.time_period.from
+                  value: now-30m
+                - type: STRING
+                  name: sparkline.time_period.to
+                  value: now
+                - type: INTEGER
+                  name: sparkline.width
+                  value: '2'
+                - type: STRING
+                  name: thresholds.0.color
+                  value: 0CA30C
+                - type: STRING
+                  name: thresholds.0.threshold
+                  value: '0'
+                - type: STRING
+                  name: thresholds.1.color
+                  value: FAB219
+                - type: STRING
+                  name: thresholds.1.threshold
+                  value: '5'
+                - type: STRING
+                  name: thresholds.2.color
+                  value: D03B3B
+                - type: STRING
+                  name: thresholds.2.threshold
+                  value: '8'
+                - type: STRING
+                  name: units_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: units_size
+                  value: '16'
+                - type: INTEGER
+                  name: value_bold
+                  value: '1'
+                - type: STRING
+                  name: value_color
+                  value: FFFFFF
+                - type: INTEGER
+                  name: value_h_pos
+                  value: '1'
+                - type: INTEGER
+                  name: value_size
+                  value: '30'
+                - type: INTEGER
+                  name: value_v_pos
+                  value: '1'
