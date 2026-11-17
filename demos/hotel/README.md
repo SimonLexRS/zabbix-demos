@@ -73,6 +73,8 @@ Stack de Zabbix 8.0 desplegado en Dokploy como Compose, con estos servicios:
 
 Como el stack no publica 10051 ni 8123, la demo se une a su red Docker (`networks.default.external`). El nombre es `<appName>_default` y va en `ZABBIX_NETWORK`. Se ve en Dokploy → Docker → Networks.
 
+Si el stack usa una red compartida aparte (p. ej. `ZBX_SHARED_NETWORK`), **`zabbix-server` también debe estar en ella**, no solo `zabbix-web` y `zabbix-proxy-apm`. Si no está, los simuladores no llegan al trapper y Hotel · Operación y Hotel · Cloud Cost quedan vacíos.
+
 ### Lo que el provisioning NO hace (hazlo a mano)
 
 1. Registrar el proxy y activar APM: en su pestaña APM, "Data collection enabled".
