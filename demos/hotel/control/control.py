@@ -7,13 +7,18 @@ Toda ruta salvo GET /salud exige "Authorization: Bearer <CONTROL_TOKEN>".
 import hmac
 import json
 import os
+import socket
 import ssl
 import subprocess
+import sys
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sim"))
+from zbx_sender import resolver_trapper  # noqa: E402
 
 CONTROL_TOKEN = os.environ.get("CONTROL_TOKEN", "")
 CONTROL_PORT = int(os.environ.get("CONTROL_PORT") or 8091)
@@ -23,6 +28,8 @@ HOTEL_URL = (os.environ.get("HOTEL_URL") or "http://127.0.0.1:8000").rstrip("/")
 PIXEL_URL = (os.environ.get("PIXEL_URL") or "http://127.0.0.1:8090").rstrip("/")
 ZABBIX_URL = os.environ.get("ZABBIX_URL", "")
 ZABBIX_API_TOKEN = os.environ.get("ZABBIX_API_TOKEN", "")
+TRAPPER_HOST = os.environ.get("ZABBIX_TRAPPER_HOST") or "zabbix-server"
+TRAPPER_PORT = int(os.environ.get("ZABBIX_TRAPPER_PORT") or 10051)
 
 MODOS = ("normal", "promo", "pagos-lentos", "pagos-error")
 ESCENARIOS = ("corte", "elevador", "normal")
@@ -125,6 +132,20 @@ def comprobaciones():
 
     informe(http_ok(f"{HOTEL_URL}/salud"), "webapp del hotel")
     informe(http_ok(f"{PIXEL_URL}/api/estado"), "vista pixel")
+
+    # Sin trapper, los dashboards Operación y Cloud Cost quedan vacíos: se comprueba la conexión directamente
+    destino = resolver_trapper(TRAPPER_HOST)
+    if destino is None:
+        informe(False, f"trapper: '{TRAPPER_HOST}' no resuelve en la red Docker; fija ZABBIX_TRAPPER_HOST "
+                       "con el nombre del servicio Zabbix server del stack")
+    else:
+        nota = "" if destino == TRAPPER_HOST else f" (ZABBIX_TRAPPER_HOST='{TRAPPER_HOST}' no resuelve; conviene fijarlo)"
+        try:
+            with socket.create_connection((destino, TRAPPER_PORT), timeout=5):
+                pass
+            informe(True, f"trapper alcanzable en {destino}:{TRAPPER_PORT}{nota}")
+        except OSError as e:
+            informe(False, f"trapper {destino}:{TRAPPER_PORT} inalcanzable ({e})")
 
     def edad(host, clave, maximo, etiqueta):
         def f():

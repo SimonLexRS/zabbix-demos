@@ -20,13 +20,16 @@ import urllib.request
 
 import importar_zabbix
 
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sim"))
+from zbx_sender import resolver_trapper  # noqa: E402
+
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PASTA_EXPORT = os.path.join(AQUI, "export")
 RESUMEN = "/salida/resumen.json"
 
 TEMPLATE_KPI = "Hotel KPIs by ClickHouse"
 HOST_APM = "apm-discovery-test"
-HOSTS_TRAPPER = ["Hotel Gran Forum - FinOps", "AWS Cost", "Google Cloud Cost"]
+HOSTS_TRAPPER = ["Hotel Gran Forum - OT", "Hotel Gran Forum - FinOps", "AWS Cost", "Google Cloud Cost"]
 DASHBOARDS = ["Hotel · Negocio", "Hotel · Operación", "Hotel · Cloud Cost"]
 TIPO_TRAPPER = 2
 TIPO_MACRO_SECRETO = 1
@@ -150,6 +153,17 @@ def paso5_trapper(api, permitidos):
     for i in cambiar:
         api("item.update", {"itemid": i["itemid"], "trapper_hosts": permitidos})
     ok(5, f"ítems trapper revisados: {len(items)}, corregidos de 127.0.0.1: {len(cambiar)}")
+    # Los simuladores envían a ZABBIX_TRAPPER_HOST: si no resuelve, Operación y Cloud Cost quedan sin datos
+    configurado = env("ZABBIX_TRAPPER_HOST", "zabbix-server")
+    destino = resolver_trapper(configurado)
+    if destino is None:
+        mal(5, f"ZABBIX_TRAPPER_HOST='{configurado}' no resuelve y ningún nombre conocido del server tampoco: "
+               "los simuladores no podrán enviar datos. Fíjalo con el nombre del servicio Zabbix server del stack")
+    elif destino != configurado:
+        print(f"[5] !! ZABBIX_TRAPPER_HOST='{configurado}' no resuelve; los simuladores usarán '{destino}'. "
+              f"Conviene fijar ZABBIX_TRAPPER_HOST={destino}", flush=True)
+    else:
+        ok(5, f"trapper {configurado} resuelve")
 
 
 def subproceso(paso, script, url, extra_env=None):
