@@ -73,6 +73,8 @@ Stack de Zabbix 8.0 desplegado en Dokploy como Compose, con estos servicios:
 
 Como el stack no publica 10051 ni 8123, la demo se une a su red Docker (`networks.default.external`). El nombre es `<appName>_default` y va en `ZABBIX_NETWORK`. Se ve en Dokploy → Docker → Networks.
 
+Si el stack usa una red compartida aparte (p. ej. `ZBX_SHARED_NETWORK`), **`zabbix-server` también debe estar en ella**, no solo `zabbix-web` y `zabbix-proxy-apm`. Si no está, los simuladores no llegan al trapper y Hotel · Operación y Hotel · Cloud Cost quedan vacíos.
+
 ### Lo que el provisioning NO hace (hazlo a mano)
 
 1. Registrar el proxy y activar APM: en su pestaña APM, "Data collection enabled".
@@ -102,7 +104,7 @@ Como el stack no publica 10051 ni 8123, la demo se une a su red Docker (`network
 | `OTEL_EXPORTER_OTLP_PROTOCOL` | `grpc` | Usa `http/protobuf` con un OpenTelemetry Collector en el puerto 4318 |
 | `OTEL_SERVICE_NAMESPACE` | `hotel` | Namespace de los servicios. Uno por despliegue |
 | `OTEL_DEPLOYMENT_ENVIRONMENT` | `production` | Entorno. El discovery crea `apm-<namespace>-<entorno>` |
-| `ZABBIX_TRAPPER_HOST` | `zabbix-server` | Destino de los simuladores |
+| `ZABBIX_TRAPPER_HOST` | `zabbix-server` | Destino de los simuladores: nombre del servicio Zabbix server en la red del stack (si no resuelve, se prueban `zabbix-server-pgsql`, `zabbix-server-mysql`, etc.) |
 | `ZABBIX_TRAPPER_PORT` | `10051` | Puerto trapper |
 | `PROVISION` | `1` | `0` = no tocar Zabbix al arrancar |
 | `PROVISION_MCP_USER` | `0` | `1` crea el usuario `demo-hotel` de solo lectura para el MCP |
@@ -188,6 +190,7 @@ Si el Zabbix no está en Docker, agrega un override con `extra_hosts: ["host.doc
 ## Solución de problemas
 
 - El provisioning falla: el log muestra `[provision] !! ... la demo arranca igual`. Revisa que `ZABBIX_API_TOKEN` sea de un Super admin y válido, que `ZABBIX_NETWORK` coincida con la red del stack y que `zabbix-web` resuelva dentro de ella. Puedes repetirlo a mano (ver `provision/README.md`).
+- Hotel · Operación y Hotel · Cloud Cost sin datos (Negocio sí tiene): los simuladores no llegan al trapper. Si el log muestra `[sim-ot] !! trapper: Sin conexión con zabbix-server:10051: [Errno -3] Temporary failure in name resolution`, el servicio server del stack tiene otro nombre. Búscalo con `docker network inspect <ZABBIX_NETWORK> --format '{{range .Containers}}{{.Name}} {{end}}'`, fíjalo en `ZABBIX_TRAPPER_HOST` y haz redeploy. `./cliente/demo.sh check` lo informa en la línea "trapper". Si el envío conecta pero dice `failed: N`, revisa que `{$TRAPPER.ALLOWED_HOSTS}` incluya la subred del contenedor.
 - No hay trazas: confirma que el proxy tenga "Data collection enabled" en su pestaña APM y que `OTEL_EXPORTER_OTLP_ENDPOINT` resuelva dentro de la red (`zabbix-proxy-apm:4317`).
 - `apm-hotel-production` no aparece: espera al discovery de 5 min, o fuerza Execute now sobre el discovery del host `apm-discovery-test`.
 - `demo.sh` no conecta: revisa `CONTROL_URL`, que `CONTROL_PORT` esté publicado y que `CONTROL_TOKEN` coincida. `GET /salud` no pide token y sirve para probar el alcance.

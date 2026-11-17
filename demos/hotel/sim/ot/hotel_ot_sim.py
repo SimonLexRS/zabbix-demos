@@ -98,11 +98,25 @@ def valores(corte, elevador, ahora):
     return v
 
 
+SENDER = ZabbixSender(TRAPPER_HOST, TRAPPER_PORT)
+_ultimo_error = None
+
+
 def enviar(v):
+    """Envía un lote. Registra los errores de conexión y los valores que Zabbix rechaza (failed > 0),
+    pero cada mensaje distinto solo una vez, para no inundar el log cada 5 s."""
+    global _ultimo_error
     lote = [{"host": HOST, "key": clave, "value": valor} for clave, valor in v.items()]
-    ok, info = ZabbixSender(TRAPPER_HOST, TRAPPER_PORT).send_batch(lote)
+    ok, info = SENDER.send_batch(lote)
+    error = None
     if not ok:
-        print(f"!! trapper: {info}", flush=True)
+        error = f"!! trapper: {info}"
+    elif " failed: 0;" not in info:
+        error = (f"!! trapper: Zabbix rechazó valores ({info}). Revisa que el host '{HOST}' exista y que "
+                 f"{{$TRAPPER.ALLOWED_HOSTS}} incluya la IP de este contenedor")
+    if error != _ultimo_error:
+        print(error or f"OK trapper: envío correcto a {SENDER.server}:{TRAPPER_PORT} ({info})", flush=True)
+        _ultimo_error = error
 
 
 def correr():
