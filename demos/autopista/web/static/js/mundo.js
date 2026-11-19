@@ -343,7 +343,9 @@ function cco(scene, cor, c) {
   scene.add(g);
   const edificio = new THREE.Mesh(new THREE.BoxGeometry(46, 13, 26), new THREE.MeshLambertMaterial({ color: 0xe8ecf0 }));
   edificio.position.y = 6.5; g.add(edificio);
-  const vidrio = new THREE.Mesh(new THREE.BoxGeometry(46.2, 3, 26.2), new THREE.MeshLambertMaterial({ color: 0x23466e }));
+  // franja de vidrio sin cara inferior: desde la sala de control taparía la pared de video
+  const matVidrio = new THREE.MeshLambertMaterial({ color: 0x23466e }), invisible = new THREE.MeshBasicMaterial({ visible: false });
+  const vidrio = new THREE.Mesh(new THREE.BoxGeometry(46.2, 3, 26.2), [matVidrio, matVidrio, matVidrio, invisible, matVidrio, matVidrio]);
   vidrio.position.y = 9.5; g.add(vidrio);
   const pared = texturaTexto(['CCO'], { w: 1024, h: 512, fondo: '#0b1220', color: '#e8f1ff', fuente: 'bold 40px sans-serif' });
   const pantalla = new THREE.Mesh(new THREE.PlaneGeometry(36, 18), new THREE.MeshBasicMaterial({ map: pared.tex }));
@@ -398,7 +400,7 @@ function salaDeControl(g) {
       const silla = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.9, 0.12), new THREE.MeshLambertMaterial({ color: 0x15191e })); silla.position.set(x, 0.95, z + 1.55); g.add(silla);
     }
   });
-  return { pantallas, camara: new THREE.Vector3(0, 4.6, 11.2), objetivo: new THREE.Vector3(0, 5.2, -12) };
+  return { pantallas, camara: new THREE.Vector3(0, 5.0, 11.0), objetivo: new THREE.Vector3(0, 5.6, -12) };
 }
 
 function accidente(scene, cor, a) {

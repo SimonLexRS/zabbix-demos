@@ -79,15 +79,15 @@ function mapa(items) {
   const heap = v('arm.gateway.heap_pct'), bloq = v('arm.bd.bloqueos'), pool = v('arm.bd.conexiones_pct'), enlace = v('arm.interop.enlace');
   const det = (s) => `p95 ${fmt(s.p95, 's')} · ${s.err == null ? '—' : s.err.toFixed(0)}% err · ${s.tot == null ? '—' : Math.round(s.tot)}/min`;
   const nodos = {
-    carriles: { x: 10, y: 120, t: 'Carriles (3 plazas)', d: '18 controladores de carril', e: 'ok' },
+    carriles: { x: 10, y: 120, t: 'Carriles (3 plazas)', d: '18 carriles TAG/manual', e: 'ok' },
     gateway: { x: 150, y: 120, t: 'peaje-gateway', d: det(gw), d2: `heap ${heap == null ? '—' : heap.toFixed(0)}%`, e: est(gw.p95 > 2 || gw.err > 5 || heap > 85, gw.p95 > 1 || heap > 75) },
     tarifas: { x: 330, y: 18, t: 'tarifas', d: 'consulta por categoría', e: 'ok' },
     validacion: { x: 330, y: 120, t: 'validacion-tag', d: det(va), e: est(va.err > 20, va.p95 > 2) },
     registro: { x: 330, y: 222, t: 'transacciones', d: det(tr), e: est(tr.p95 > 1 || tr.err > 10, tr.p95 > 0.6) },
     externo: { x: 455, y: 120, t: 'operador-tag', d: enlace === 0 ? 'SIN RESPUESTA' : `p95 ${fmt(op.p95, 's')}`, e: est(enlace === 0 || op.p95 > 2.5, op.p95 > 1), ext: true },
-    bd: { x: 455, y: 222, t: 'BD recaudo', d: `bloqueos ${bloq ?? '—'} · pool ${pool == null ? '—' : pool.toFixed(0)}%`, e: est(bloq > 10, pool > 80) },
+    bd: { x: 455, y: 222, t: 'BD recaudo', d: `bloq. ${bloq ?? '—'} · pool ${pool == null ? '—' : pool.toFixed(0)}%`, e: est(bloq > 10, pool > 80) },
   };
-  const W = { carriles: 120, gateway: 150, tarifas: 150, validacion: 110, registro: 110, externo: 100, bd: 100 };
+  const W = { carriles: 120, gateway: 150, tarifas: 150, validacion: 115, registro: 115, externo: 102, bd: 102 };
   const aristas = [['carriles', 'gateway'], ['gateway', 'tarifas'], ['gateway', 'validacion'], ['gateway', 'registro'], ['validacion', 'externo'], ['registro', 'bd']];
   const c = (k) => [nodos[k].x + W[k] / 2, nodos[k].y + 30];
   let svg = aristas.map(([a, b]) => {

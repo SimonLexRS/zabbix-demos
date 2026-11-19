@@ -137,10 +137,13 @@ const etqAcc = etiqueta('<small>DAI</small>Accidente km 100', punto(datos.accide
 etqAcc.el.style.display = 'none';
 const etqUnid = new Map();
 const v3 = new THREE.Vector3();
+const centroCco = punto(datos.cco.s, datos.cco.lat);
 function moverEtiquetas() {
   const w = window.innerWidth, h = window.innerHeight;
+  // dentro de la sala de control las etiquetas del corredor se verían a través de las paredes
+  const enSala = Math.hypot(camara.position.x - centroCco.x, camara.position.z - centroCco.z) < 26 && camara.position.y < 13;
   for (const e of etiquetas) {
-    if (e.oculta) { e.el.style.display = 'none'; continue; }
+    if (e.oculta || enSala) { e.el.style.display = 'none'; continue; }
     const d = camara.position.distanceTo(e.pos);
     v3.copy(e.pos).project(camara);
     const ver = v3.z < 1 && d < e.lejos && d > e.cerca && Math.abs(v3.x) < 1.1 && Math.abs(v3.y) < 1.1;
