@@ -32,7 +32,7 @@ scene.add(hemi, sol);
 const camara = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 400000);
 const orbita = new OrbitControls(camara, renderer.domElement);
 orbita.enableDamping = true; orbita.dampingFactor = 0.08;
-orbita.maxPolarAngle = Math.PI * 0.47; orbita.minDistance = 25; orbita.maxDistance = 160000;
+orbita.maxPolarAngle = Math.PI * 0.47; orbita.minDistance = 6; orbita.maxDistance = 160000;
 orbita.screenSpacePanning = false;
 
 const mundo = construirMundo(scene, cor);
@@ -65,8 +65,26 @@ const LUGARES = {
 };
 const sel = document.getElementById('ir');
 for (const [id, l] of Object.entries(LUGARES)) sel.add(new Option(l.nombre, id));
-let vuelo = null;
+sel.add(new Option('Seguir un vehículo (X)', 'seguir'));
+let vuelo = null, seguido = null;
+const vSeg = new THREE.Vector3();
+// cámara que acompaña a un vehículo (prefiere camiones y buses, que lucen más); cada X cambia de vehículo
+function seguir() {
+  const lista = [...vehiculos.v.entries()].filter(([, e]) => Math.abs(e.v) > 5);
+  if (!lista.length) return;
+  const pesados = lista.filter(([, e]) => e.cat >= 2);
+  const pool = pesados.length && Math.random() < 0.6 ? pesados : lista;
+  seguido = pool[Math.floor(Math.random() * pool.length)][0];
+  const e = vehiculos.v.get(seguido);
+  const f = cor.marco(e.ss, e.ll, {}), sgn = e.v < 0 ? -1 : 1;
+  vSeg.set(f.x, 0, f.z);
+  vuelo = { t0: performance.now(), p0: camara.position.clone(), t0v: orbita.target.clone(),
+    p: vSeg.clone().add(new THREE.Vector3(-f.tx * 22 * sgn + f.nx * 9 * sgn, 9, -f.tz * 22 * sgn + f.nz * 9 * sgn)), t: vSeg.clone(), dur: 1600 };
+  sel.value = 'seguir';
+}
 function ir(id) {
+  if (id === 'seguir') return seguir();
+  seguido = null;
   const l = LUGARES[id];
   vuelo = { t0: performance.now(), p0: camara.position.clone(), t0v: orbita.target.clone(), p: l.p, t: l.t, dur: 2200 };
   sel.value = id;
@@ -237,6 +255,16 @@ function ciclo(ahora) {
     orbita.target.lerpVectors(vuelo.t0v, vuelo.t, e);
     if (f >= 1) vuelo = null;
   }
+  if (seguido !== null && !vuelo) {
+    const e = vehiculos.v.get(seguido);
+    if (!e) seguir();
+    else {
+      // mueve cámara y objetivo con el vehículo: el usuario puede seguir orbitando alrededor
+      const f = cor.marco(e.ss, e.ll, {});
+      const dx = f.x - orbita.target.x, dz = f.z - orbita.target.z;
+      orbita.target.x += dx; orbita.target.z += dz; camara.position.x += dx; camara.position.z += dz;
+    }
+  }
   orbita.update();
   const dist = camara.position.distanceTo(orbita.target);
   const lejos = dist > 3500;
@@ -282,7 +310,7 @@ function ciclo(ahora) {
 }
 requestAnimationFrame(ciclo);
 window.addEventListener('keydown', (e) => {
-  const atajos = { v: 'vegachi', s: 'sis', p: 'pbe', a: 'accidente', c: 'corredor', d: 'dolores', f: 'fibra', o: 'cco' };
+  const atajos = { v: 'vegachi', s: 'sis', p: 'pbe', a: 'accidente', c: 'corredor', d: 'dolores', f: 'fibra', o: 'cco', x: 'seguir' };
   if (e.target.tagName !== 'SELECT' && atajos[e.key.toLowerCase()] && !e.metaKey && !e.ctrlKey) ir(atajos[e.key.toLowerCase()]);
 });
 void ultimoPoll;
