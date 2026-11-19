@@ -1,0 +1,95 @@
+zabbix_export:
+  version: '8.0'
+  host_groups:
+    - uuid: dc10873b4c5e46aa99f47fccbff048e3
+      name: Mall/APM
+    - uuid: 3793f0d67357492db9df89f82947b228
+      name: Mall/Infraestructura
+    - uuid: d907ba4aa8c848f3ba42a859ebfaf8f8
+      name: Mall/Negocio
+    - uuid: 4dcc05e99639452e88cb154090119f07
+      name: Mall/Seguridad
+  hosts:
+    - host: 'Mall - APM discovery'
+      name: 'Mall - APM discovery'
+      templates:
+        - name: 'APM applications discovery by ClickHouse HTTP v3'
+      groups:
+        - name: Mall/APM
+      tags:
+        - tag: demo
+          value: mall
+      macros:
+        - macro: '{$APM.NAMESPACE.MATCHES}'
+          value: ^mall$
+        - macro: '{$CH.PASSWORD}'
+          type: SECRET_TEXT
+        - macro: '{$CH.URL}'
+          value: 'http://clickhouse:8123/'
+        - macro: '{$CH.USER}'
+          value: zabbix
+    - host: 'Mall - Clima'
+      name: 'Mall - Clima'
+      templates:
+        - name: 'Mall Clima'
+      groups:
+        - name: Mall/Infraestructura
+      tags:
+        - tag: demo
+          value: mall
+    - host: 'Mall - Energia'
+      name: 'Mall - Energía'
+      templates:
+        - name: 'Mall Energia'
+      groups:
+        - name: Mall/Infraestructura
+      tags:
+        - tag: demo
+          value: mall
+    - host: 'Mall - Escaleras'
+      name: 'Mall - Escaleras'
+      templates:
+        - name: 'Mall Escaleras'
+      groups:
+        - name: Mall/Infraestructura
+      tags:
+        - tag: demo
+          value: mall
+    - host: 'Mall - Estacionamiento'
+      name: 'Mall - Estacionamiento'
+      templates:
+        - name: 'Mall Estacionamiento'
+      groups:
+        - name: Mall/Seguridad
+      tags:
+        - tag: demo
+          value: mall
+    - host: 'Mall - Negocio'
+      name: 'Mall - Negocio'
+      templates:
+        - name: 'Mall APM by Telemetry query'
+        - name: 'Mall KPIs by ClickHouse'
+        - name: 'Mall Negocio'
+      groups:
+        - name: Mall/Negocio
+      tags:
+        - tag: demo
+          value: mall
+    - host: 'Mall - Puertas'
+      name: 'Mall - Puertas'
+      templates:
+        - name: 'Mall Puertas'
+      groups:
+        - name: Mall/Infraestructura
+      tags:
+        - tag: demo
+          value: mall
+    - host: 'Mall - Seguridad'
+      name: 'Mall - Seguridad'
+      templates:
+        - name: 'Mall Seguridad'
+      groups:
+        - name: Mall/Seguridad
+      tags:
+        - tag: demo
+          value: mall
