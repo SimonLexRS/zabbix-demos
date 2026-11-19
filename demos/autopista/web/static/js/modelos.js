@@ -49,10 +49,21 @@ function rueda(r, ancho, x, z, dobles = false) {
 }
 
 function faros(ancho, y, zFrente, zAtras, h = 0.16, w = 0.32) {
+  zFrente += 0.06; zAtras -= 0.06; // por fuera del bisel de la carrocería
   return [
     ...[-1, 1].map((l) => caja(FARO, w, h, 0.06, l * (ancho / 2 - w / 2 - 0.08), y, zFrente)),
     ...[-1, 1].map((l) => caja(STOP, w * 0.8, h, 0.06, l * (ancho / 2 - w / 2 - 0.06), y, zAtras)),
   ];
+}
+
+// Vidrio plano apoyado sobre el tramo (z1,y1)→(z2,y2) de la silueta (de adelante hacia atrás), por fuera del bisel.
+function vidrioInclinado(z1, y1, z2, y2, ancho, sobre = 0.075) {
+  const dz = z2 - z1, dy = y2 - y1, largo = Math.hypot(dz, dy);
+  const g = new THREE.BoxGeometry(ancho, 0.03, largo * 0.92);
+  g.rotateX(Math.atan2(-dy / largo, dz / largo));
+  const nz = dy / largo, ny = -dz / largo;
+  g.translate(0, (y1 + y2) / 2 + ny * sobre, (z1 + z2) / 2 + nz * sobre);
+  return colorear(g, VIDRIO);
 }
 
 function modelo(carroceria, detalles, luces) {
@@ -64,7 +75,8 @@ function sedan() {
   const L = 2.25, W = 1.78;
   const cuerpo = perfil(0xffffff, [[-L, 0.3], [L, 0.3], [L, 0.72], [1.95, 0.84], [0.95, 0.94], [0.32, 1.38], [-0.95, 1.42], [-1.75, 1.0], [-L, 0.92]], W);
   const vidrios = perfil(VIDRIO, [[0.88, 0.97], [0.36, 1.33], [-0.92, 1.36], [-1.62, 1.02]], W + 0.03, 0, 0.01);
-  return modelo([cuerpo], [vidrios, ...rueda(0.32, 0.22, 0.78, 1.38), ...rueda(0.32, 0.22, 0.78, -1.38)], faros(W, 0.6, L + 0.01, -L - 0.01));
+  const parabrisas = vidrioInclinado(0.95, 0.94, 0.32, 1.38, W - 0.3), luneta = vidrioInclinado(-0.95, 1.42, -1.75, 1.0, W - 0.35);
+  return modelo([cuerpo], [vidrios, parabrisas, luneta, ...rueda(0.32, 0.22, 0.78, 1.38), ...rueda(0.32, 0.22, 0.78, -1.38)], faros(W, 0.6, L + 0.01, -L - 0.01));
 }
 
 function camioneta() {
@@ -72,7 +84,8 @@ function camioneta() {
   const cuerpo = perfil(0xffffff, [[-L, 0.36], [L, 0.36], [L, 0.9], [1.75, 1.02], [1.0, 1.1], [0.55, 1.68], [-L + 0.1, 1.72], [-L, 1.6]], W);
   const vidrios = perfil(VIDRIO, [[0.95, 1.13], [0.58, 1.62], [-L + 0.25, 1.64], [-L + 0.25, 1.14]], W + 0.03, 0, 0.01);
   const barras = [-1, 1].map((l) => caja(0x3a3a3a, 0.06, 0.06, 2.6, l * 0.7, 1.74, -0.6));
-  return modelo([cuerpo], [vidrios, ...barras, ...rueda(0.38, 0.26, 0.82, 1.45), ...rueda(0.38, 0.26, 0.82, -1.45)], faros(W, 0.78, L + 0.01, -L - 0.01));
+  const parabrisas = vidrioInclinado(1.0, 1.1, 0.55, 1.68, W - 0.3), trasero = caja(VIDRIO, W - 0.4, 0.45, 0.03, 0, 1.12, -L - 0.06);
+  return modelo([cuerpo], [vidrios, parabrisas, trasero, ...barras, ...rueda(0.38, 0.26, 0.82, 1.45), ...rueda(0.38, 0.26, 0.82, -1.45)], faros(W, 0.78, L + 0.01, -L - 0.01));
 }
 
 function pickup() {
@@ -81,7 +94,8 @@ function pickup() {
   const platon = perfil(0xffffff, [[-L, 0.38], [-0.35, 0.38], [-0.35, 1.08], [-L, 1.08]], W);
   const vidrios = perfil(VIDRIO, [[1.0, 1.13], [0.62, 1.64], [-0.2, 1.65], [-0.2, 1.14]], W + 0.03, 0, 0.01);
   const fondo = caja(0x2a2a2a, W - 0.2, 0.05, 1.8, 0, 0.62, -1.3);
-  return modelo([cabina, platon], [vidrios, fondo, ...rueda(0.38, 0.26, 0.82, 1.45), ...rueda(0.38, 0.26, 0.82, -1.45)], faros(W, 0.8, L + 0.01, -L - 0.01));
+  const parabrisas = vidrioInclinado(1.05, 1.1, 0.6, 1.7, W - 0.3), trasero = caja(VIDRIO, W - 0.5, 0.4, 0.03, 0, 1.2, -0.42);
+  return modelo([cabina, platon], [vidrios, fondo, parabrisas, trasero, ...rueda(0.38, 0.26, 0.82, 1.45), ...rueda(0.38, 0.26, 0.82, -1.45)], faros(W, 0.8, L + 0.01, -L - 0.01));
 }
 
 // ---------- bus (cat. II), 10 m
@@ -89,7 +103,7 @@ function bus() {
   const L = 5, W = 2.5;
   const cuerpo = perfil(0xffffff, [[-L, 0.42], [L, 0.42], [L, 2.5], [L - 0.35, 3.05], [-L + 0.2, 3.1], [-L, 2.9]], W);
   const banda = caja(VIDRIO, W + 0.04, 0.95, 8.6, 0, 1.75, -0.2);
-  const parabrisas = caja(VIDRIO, W - 0.25, 1.25, 0.04, 0, 1.45, L + 0.02);
+  const parabrisas = caja(VIDRIO, W - 0.25, 1.25, 0.04, 0, 1.45, L + 0.08);
   const techo = caja(0xd9dde2, W - 0.4, 0.22, 3.2, 0, 3.08, -0.5);
   return modelo([cuerpo], [banda, parabrisas, techo, ...rueda(0.52, 0.32, 1.02, 3.0), ...rueda(0.52, 0.3, 1.02, -2.9, true)],
     faros(W, 0.85, L + 0.01, -L - 0.01, 0.22, 0.4));
@@ -100,8 +114,8 @@ function cabinaCamion(zFrente, W = 2.4, alto = 2.75) {
   const z0 = zFrente;
   const cab = perfil(0xffffff, [[z0 - 2.3, 0.75], [z0, 0.75], [z0, 1.55], [z0 - 0.15, 1.75], [z0 - 1.1, 1.85], [z0 - 1.3, alto], [z0 - 2.3, alto]], W);
   const vidrio = perfil(VIDRIO, [[z0 - 1.12, 1.9], [z0 - 1.3, alto - 0.12], [z0 - 1.95, alto - 0.12], [z0 - 1.95, 1.9]], W + 0.03, 0, 0.01);
-  const frente = caja(VIDRIO, W - 0.5, 0.6, 0.04, 0, alto - 0.72, z0 - 1.16);
-  const parrilla = caja(0x9aa1a8, W - 0.9, 0.55, 0.05, 0, 0.9, z0 + 0.02);
+  const frente = vidrioInclinado(z0 - 1.1, 1.85, z0 - 1.3, alto, W - 0.4);
+  const parrilla = caja(0x9aa1a8, W - 0.9, 0.55, 0.05, 0, 0.9, z0 + 0.08);
   const guia = [-1, 1].map((l) => caja(GUIA, 0.12, 0.08, 0.08, l * (W / 2 - 0.1), alto + 0.02, z0 - 1.4));
   return { cab, detalles: [vidrio, frente, parrilla, ...guia] };
 }
