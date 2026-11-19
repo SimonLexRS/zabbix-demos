@@ -1,10 +1,20 @@
-# Autopista Río Magdalena
+# Autopista
 
-Gemelo digital 3D del corredor Remedios – Vegachí – Alto de Dolores – Puerto Berrío – Conexión Troncal del Magdalena (153,3 km, 4 unidades funcionales, peajes Vegachí, Santa Isabel y Puerto Berrío). La demo muestra en un mismo Zabbix 8.0:
+Gemelo digital 3D de un corredor vial de 153 km con 4 unidades funcionales, tres peajes (Vegachí, Santa Isabel y Puerto Berrío), equipos ITS y un centro de control. Está inspirado en un corredor real del Magdalena Medio colombiano. La demo muestra en un mismo Zabbix 8.0:
 
 - **OT del corredor**: flujo vehicular por tramo, colas, plazas de peaje (carriles, barreras, energía, UPS, enlace) y equipos ITS (nodos de fibra, cámaras DAI, radares, PMV, estaciones meteorológicas, gálibo).
 - **APM de la app de control de peajes**: cinco servicios instrumentados con OpenTelemetry. Cada vehículo que paga hace una transacción **real** contra la app. Sus trazas llegan al APM nativo de Zabbix, y su latencia o su error deciden cuánto tarda en abrirse la barrera.
 - **Causa raíz con CEP**: las reglas de Zabbix 8.0 agrupan causa y síntomas por zona. Además detectan incidentes por patrón y marcan la causa raíz central en los síntomas que aparecen en las plazas.
+
+## Vistas
+
+| Ruta | Qué muestra |
+|---|---|
+| `/` | Escena 3D del corredor: tránsito, peajes, ITS, unidades de servicio y la sala de control del CCO (tecla `O`), cuyas pantallas muestran Zabbix. La tecla `X` sigue a un vehículo |
+| `/peaje` | App de control de peajes: carriles en vivo, transacciones reales con su traza, mapa de servicios con los datos de APM de Zabbix, botones para simular problemas y lo que Zabbix detecta con el CEP |
+| `/cco` | Centro de mando tipo video wall: corredor 3D en recorrido automático, paneles de Zabbix (severidades, causa y síntomas, historial), app de peajes, KPI, fallas y bitácora |
+
+Los paneles de Zabbix del centro de mando y de la sala 3D se dibujan con la API (`problem.get`, `item.get` e `history.get`), porque el frontend de Zabbix no se deja incrustar en otro dominio (`X-Frame-Options: SAMEORIGIN`). Un enlace abre el dashboard real.
 
 Un solo contenedor corre la escena 3D, los cinco servicios de recaudo, el simulador, el control y el provisioning. Para desplegarla, sigue `docs/DESPLIEGUE-DOKPLOY.md`.
 
@@ -74,7 +84,7 @@ Los eventos llevan `demo=autopista` y tags propios (`zona`, `rol`, `nivel`, `pro
 
 ## Modelo y supuestos
 
-Se tomaron del sitio de la concesión:
+Se basan en información pública del corredor real:
 - las longitudes de las UF;
 - las plazas de peaje y sus tarifas por categoría (en las transacciones y en el recaudo);
 - el tipo de equipos ITS (cámaras con detección de incidentes, radares, gálibos, estaciones meteorológicas y PMV);

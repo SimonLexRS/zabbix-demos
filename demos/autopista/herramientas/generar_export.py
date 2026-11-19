@@ -153,7 +153,7 @@ def t_corredor():
                 {"expr": f"min({ref(kc)},2m)>{{$ARM.COLA.MAX}}", "nombre": f"Tramo {n}: cola en la vía ({{ITEM.LASTVALUE}})",
                  "prioridad": "HIGH", "tags_": ttags(t["uf"], "sintoma", "ot", "cola_vial", f"tramo-{i}")}]),
         ]
-    return template(T, "Corredor Autopista Río Magdalena: tránsito por tramo (~10 km por UF y sentido), datos por trapper.", items, macros=[
+    return template(T, "Corredor de la autopista demo: tránsito por tramo (~10 km por UF y sentido), datos por trapper.", items, macros=[
         ("{$ARM.VEL.MIN}", "35", "Velocidad media mínima del tramo (km/h) durante 3 min."),
         ("{$ARM.COLA.MAX}", "0.4", "Cola máxima en un tramo (km) durante 2 min."),
     ])

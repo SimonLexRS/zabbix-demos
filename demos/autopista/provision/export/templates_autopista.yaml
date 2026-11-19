@@ -741,7 +741,7 @@ zabbix_export:
     - uuid: '327a3821d4de49128c87a81424b96327'
       template: 'Autopista Corredor'
       name: 'Autopista Corredor'
-      description: 'Corredor Autopista Río Magdalena: tránsito por tramo (~10 km por UF y sentido), datos por trapper.'
+      description: 'Corredor de la autopista demo: tránsito por tramo (~10 km por UF y sentido), datos por trapper.'
       groups:
         - name: 'Templates/Autopista'
       items:

@@ -98,3 +98,6 @@ button:disabled { opacity: .4; cursor: default; }
 .etq.its { font-size: 11px; font-weight: 500; }
 .etq.ok-its { border-color: rgba(56,217,150,.6); }
 @media (max-width: 900px) { #lateral { display: none; } }
+/* modo centro de mando: solo la escena */
+body.modo-cco #kpis, body.modo-cco #problemas, body.modo-cco #lateral, body.modo-cco #barra, body.modo-cco #aviso { display: none; }
+#enlaces { display: flex; gap: 10px; } #enlaces a { color: #a7e0ff; font-size: 12.5px; text-decoration: none; white-space: nowrap; }

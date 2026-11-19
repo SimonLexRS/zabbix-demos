@@ -1,4 +1,4 @@
-# Demo "Autopista Río Magdalena" en un solo contenedor: escena 3D, app de recaudo instrumentada (OpenTelemetry),
+# Demo "Autopista" en un solo contenedor: escena 3D, app de recaudo instrumentada (OpenTelemetry),
 # simulador del corredor por trapper, control y provisioning de Zabbix. Ver supervisor.py, procesos.json y .env.example.
 FROM python:3.12-slim
 WORKDIR /srv

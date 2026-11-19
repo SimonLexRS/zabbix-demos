@@ -353,9 +353,52 @@ function cco(scene, cor, c) {
   g.add(pantalla);
   const soporte = new THREE.Mesh(new THREE.BoxGeometry(1.2, 10, 1.2), new THREE.MeshLambertMaterial({ color: 0x6b7680 })); soporte.position.y = 17; g.add(soporte);
   const torre = poste(42, 0xd03b3b); torre.position.set(18, 0, 8); g.add(torre);
-  const logo = new THREE.Mesh(new THREE.PlaneGeometry(20, 3), new THREE.MeshBasicMaterial({ map: texturaTexto(['CCO · Autopista Río Magdalena'], { w: 1024, h: 150, fondo: '#0f5aa8', color: '#ffffff', fuente: 'bold 58px sans-serif' }).tex }));
+  const logo = new THREE.Mesh(new THREE.PlaneGeometry(20, 3), new THREE.MeshBasicMaterial({ map: texturaTexto(['Centro de Control de Operaciones'], { w: 1024, h: 150, fondo: '#0f5aa8', color: '#ffffff', fuente: 'bold 58px sans-serif' }).tex }));
   logo.position.set(0, 11, 13.1); g.add(logo);
-  return { grupo: g, pantalla, pared };
+  return { grupo: g, pantalla, pared, sala: salaDeControl(g) };
+}
+
+// Sala de control dentro del edificio: se ve desde adentro porque las caras exteriores se descartan por detrás.
+// Pared de video con tres pantallas (Zabbix: problemas con CEP, gráficos; app de peajes), consolas y operadores.
+function salaDeControl(g) {
+  const interior = new THREE.Mesh(new THREE.BoxGeometry(45.4, 12.6, 25.4), new THREE.MeshLambertMaterial({ color: 0x1c232c, side: THREE.BackSide }));
+  interior.position.y = 6.35; g.add(interior);
+  const piso = new THREE.Mesh(new THREE.PlaneGeometry(45, 25), new THREE.MeshLambertMaterial({ color: 0x2c333b }));
+  piso.rotation.x = -Math.PI / 2; piso.position.y = 0.08; g.add(piso);
+  const muro = new THREE.Mesh(new THREE.BoxGeometry(44, 9.6, 0.4), new THREE.MeshLambertMaterial({ color: 0x0b0f14 }));
+  muro.position.set(0, 5.6, -12.4); g.add(muro);
+  const pantallas = [-14.6, 0, 14.6].map((x) => {
+    const cv = document.createElement('canvas');
+    cv.width = 1024; cv.height = 576;
+    const tex = new THREE.CanvasTexture(cv);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = 4;
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(14, 7.875), new THREE.MeshBasicMaterial({ map: tex }));
+    p.position.set(x, 5.6, -12.17); g.add(p);
+    return { canvas: cv, tex };
+  });
+  // franja de luz sobre la pared de video
+  const franja = new THREE.Mesh(new THREE.BoxGeometry(44, 0.25, 0.3), new THREE.MeshBasicMaterial({ color: 0xd40000 }));
+  franja.position.set(0, 10.1, -12.1); g.add(franja);
+  // consolas en dos filas, con monitores que repiten las pantallas grandes
+  const matMesa = new THREE.MeshLambertMaterial({ color: 0x3a4450 }), matPiel = new THREE.MeshLambertMaterial({ color: 0xc69c78 });
+  const matCamisa = [0x2f5d8a, 0x8a2f3f, 0x2f8a62, 0x5d4a8a].map((c) => new THREE.MeshLambertMaterial({ color: c }));
+  [[-3.5, 5], [3.5, 6]].forEach(([z, n], fila) => {
+    for (let i = 0; i < n; i++) {
+      const x = (i - (n - 1) / 2) * 6.4;
+      const mesa = new THREE.Mesh(new THREE.BoxGeometry(5.2, 0.9, 1.4), matMesa); mesa.position.set(x, 0.55, z); g.add(mesa);
+      [-1.3, 0, 1.3].forEach((dx, k) => {
+        const mon = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.7), new THREE.MeshBasicMaterial({ map: pantallas[(i + k + fila) % 3].tex }));
+        mon.position.set(x + dx, 1.45, z - 0.35); mon.rotation.y = dx * -0.25; g.add(mon);
+        const pata = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.4, 0.08), matMesa); pata.position.set(x + dx, 1.05, z - 0.4); g.add(pata);
+      });
+      // operador sentado
+      const cuerpo = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.32, 0.9, 10), matCamisa[(i + fila) % 4]); cuerpo.position.set(x, 1.0, z + 1.1); g.add(cuerpo);
+      const cabeza = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 10), matPiel); cabeza.position.set(x, 1.62, z + 1.1); g.add(cabeza);
+      const silla = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.9, 0.12), new THREE.MeshLambertMaterial({ color: 0x15191e })); silla.position.set(x, 0.95, z + 1.55); g.add(silla);
+    }
+  });
+  return { pantallas, camara: new THREE.Vector3(0, 4.6, 11.2), objetivo: new THREE.Vector3(0, 5.2, -12) };
 }
 
 function accidente(scene, cor, a) {

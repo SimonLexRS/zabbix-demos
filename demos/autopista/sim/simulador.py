@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Simulador del corredor Autopista Río Magdalena: alimenta la escena 3D y envía todo a Zabbix por trapper.
+"""Simulador del corredor vial de la demo: alimenta la escena 3D y envía todo a Zabbix por trapper.
 
 - Tránsito microscópico 1D por sentido (modelo IDM de seguimiento vehicular), con adelantamiento en las zonas
   habilitadas, accesos en las poblaciones y demanda según la hora del día.
@@ -231,6 +231,7 @@ class Mundo:
         self.ciclo_gw = 0
         self.sincronizando = 0
         self.llamadas = collections.deque()  # (t_real, ms, ok) de las transacciones reales
+        self.ultimas = collections.deque(maxlen=40)  # últimas transacciones, para la app de peajes
         self.lluvia = 0.0
         self.its_mudos = set()
         self.unidades = [
@@ -518,14 +519,15 @@ class Mundo:
         if not r["ok"]:
             # sin registro: recibo de contingencia y la transacción queda pendiente de sincronizar
             v.servicio = max(v.servicio, 0) + random.uniform(6, 10)
-            v.pago = {"medio": "efectivo", "contingencia": True, "ok": False}
+            v.pago = {"medio": "efectivo", "contingencia": True, "ok": False, "ms": r["ms"], "traza": v.ultima_traza}
             plaza.pendientes.append({"plaza": plaza.id, "carril": c.id, "sentido": c.sentido, "categoria": v.cat,
                                      "medio": "efectivo", "tag_id": v.tag_id, "placa": v.placa})
             return
         if r.get("tag_rechazado"):
             # el TAG no se validó: el operador cobra en efectivo en el mismo carril
             v.servicio = max(v.servicio, 0) + random.uniform(16, 26)
-        v.pago = {"medio": r.get("medio", "efectivo"), "valor": r.get("valor", 0), "rechazado": bool(r.get("tag_rechazado")), "ok": True}
+        v.pago = {"medio": r.get("medio", "efectivo"), "valor": r.get("valor", 0), "rechazado": bool(r.get("tag_rechazado")), "ok": True,
+                  "ms": r["ms"], "traza": v.ultima_traza}
 
     def registrar_paso(self, plaza, v):
         pago = v.pago or {}
@@ -535,6 +537,11 @@ class Mundo:
         if pago.get("medio") == "tag":
             self.tag_hoy += 1
         plaza.pasos.append((self.t, pago.get("medio", "efectivo"), bool(pago.get("rechazado"))))
+        c = v.carril
+        self.ultimas.append({"t": time.time(), "plaza": plaza.id, "carril": c.id if c else "", "placa": v.placa, "cat": v.cat,
+                             "medio": pago.get("medio", "efectivo"), "valor": valor, "ms": pago.get("ms"), "ok": bool(pago.get("ok", True)),
+                             "rechazado": bool(pago.get("rechazado")), "contingencia": bool(pago.get("contingencia")),
+                             "traza": (pago.get("traza") or "")[:16]})
         v.servicio, v.futuro = 0.0, None
 
     def sincronizar(self):
@@ -992,7 +999,8 @@ def foto(m, activos, velocidad, ahora):
             "id": p.id, "nombre": p.datos["nombre"], "modo": p.modo, "red": p.red, "ups": round(p.ups), "planta": p.planta,
             "enlace": p.enlace, "pendientes": len(p.pendientes),
             "carriles": [{"id": c.id, "tipo": c.tipo, "estado": c.estado, "cola": len(c.cola), "barrera": round(c.barrera, 2),
-                          "falla": c.barrera_falla} for c in p.carriles()],
+                          "falla": c.barrera_falla, "caseta": c.cola[0].placa if c.cola and c.cola[0].p <= 0.3 else "",
+                          "cat": c.cola[0].cat if c.cola and c.cola[0].p <= 0.3 else 0} for c in p.carriles()],
         } for p in m.plazas],
         "its": [{"id": d["id"], "ok": d["id"] not in m.its_mudos and not (d["id"] == "nod-uf2" and "fibra-uf2" in activos),
                  "alerta": (d["id"] == "dai-k099" and "accidente-uf3" in activos) or (d["id"] == "met-k071" and m.lluvia > 0.3)
@@ -1003,6 +1011,7 @@ def foto(m, activos, velocidad, ahora):
         "accidente": "accidente-uf3" in activos,
         "galibo": "galibo" in activos,
         "bitacora": m.bitacora,
+        "transacciones": list(m.ultimas)[-25:],
         "problemas_ensayo": problemas_ensayo(m, activos),
     }
 
@@ -1022,6 +1031,7 @@ def main():
         p.pendientes.clear()
         p.latencias.clear()
     m.llamadas.clear()
+    m.ultimas.clear()
     m.tx_hoy = m.recaudo_hoy = m.tag_hoy = 0
     m.bitacora.clear()
     m.anotar("Simulador listo: corredor de 153 km en operación", "ok")

@@ -1,4 +1,4 @@
-# Demo "Autopista Río Magdalena" para Dokploy: UN solo contenedor con la escena 3D, la app de recaudo instrumentada,
+# Demo "Autopista" para Dokploy: UN solo contenedor con la escena 3D, la app de recaudo instrumentada,
 # el simulador del corredor, el servicio de control y el provisioning de Zabbix. Se une a la red del stack de Zabbix 8.0
 # (ZABBIX_NETWORK) y usa sus nombres de servicio: zabbix-proxy-apm (OTLP/gRPC 4317), zabbix-web (API), zabbix-server (10051).
 # Variables en Dokploy → Environment (ver .env.example). La imagen se construye desde este repositorio.

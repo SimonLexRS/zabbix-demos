@@ -6,6 +6,7 @@ import { Corredor } from './corredor.js';
 import { construirMundo } from './mundo.js';
 import { Vehiculos, Unidades } from './vehiculos.js';
 import { Hud } from './hud.js';
+import * as pantallas from './pantallas.js';
 
 const datos = await (await fetch('/static/corredor.json')).json();
 const cor = new Corredor(datos);
@@ -63,6 +64,9 @@ const LUGARES = {
   uf1: { nombre: 'UF-1 Remedios – Vegachí', ...lugar(17, 9000, 9000) },
   uf4: { nombre: 'UF-4 hasta la Troncal', ...lugar(136, 9000, 9000) },
 };
+mundo.cco.grupo.updateMatrixWorld(true);
+LUGARES.sala = { nombre: 'Sala de control del CCO (Zabbix)', p: mundo.cco.grupo.localToWorld(mundo.cco.sala.camara.clone()),
+  t: mundo.cco.grupo.localToWorld(mundo.cco.sala.objetivo.clone()) };
 const sel = document.getElementById('ir');
 for (const [id, l] of Object.entries(LUGARES)) sel.add(new Option(l.nombre, id));
 sel.add(new Option('Seguir un vehículo (X)', 'seguir'));
@@ -92,7 +96,24 @@ function ir(id) {
 sel.onchange = () => ir(sel.value);
 camara.position.copy(LUGARES.corredor.p);
 orbita.target.copy(LUGARES.corredor.t);
-setTimeout(() => ir('vegachi'), 1800);
+// modo centro de mando (/cco): sin paneles y con recorrido automático de cámara
+const MODO_CCO = new URLSearchParams(location.search).get('modo') === 'cco';
+if (MODO_CCO) {
+  document.body.classList.add('modo-cco');
+  const recorrido = ['vegachi', 'sala', 'seguir', 'sis', 'accidente', 'sala', 'pbe', 'dolores', 'seguir', 'corredor'];
+  let paso = 0;
+  const siguiente = () => {
+    let id = recorrido[paso++ % recorrido.length];
+    // con una falla activa, el recorrido pasa por el lugar afectado
+    const foco = { 'accidente-uf3': 'accidente', 'lluvia-dolores': 'dolores', 'energia-vegachi': 'vegachi', 'fibra-uf2': 'fibra', 'barrera-pbe': 'pbe' };
+    const activo = (estado?.activos || []).find((a) => foco[a]);
+    if (activo && paso % 3 === 0) id = foco[activo];
+    ir(id);
+    window.parent?.postMessage({ lugar: id === 'seguir' ? 'siguiendo un vehículo' : LUGARES[id].nombre }, '*');
+  };
+  setTimeout(siguiente, 1500);
+  setInterval(siguiente, 16000);
+} else setTimeout(() => ir('vegachi'), 1800);
 
 // ---------- etiquetas HTML
 const capa = document.getElementById('etiquetas');
@@ -207,7 +228,7 @@ function pintarCco() {
   g.fillStyle = '#0b1220'; g.fillRect(0, 0, cv.width, cv.height);
   g.fillStyle = '#d40000'; g.fillRect(0, 0, cv.width, 54);
   g.fillStyle = '#fff'; g.font = 'bold 30px sans-serif'; g.textAlign = 'left';
-  g.fillText('ZABBIX 8.0 · CCO Autopista Río Magdalena', 20, 38);
+  g.fillText('ZABBIX 8.0 · Centro de Control de Operaciones', 20, 38);
   const k = estado.kpi;
   const kp = [['Vehículos', k.vehiculos], ['Vel. media', `${k.velocidad.toFixed(0)} km/h`], ['Cola máx.', `${k.cola_km.toFixed(1)} km`], ['APM p95', `${k.latencia_ms} ms`]];
   kp.forEach(([n, v], i) => {
@@ -225,6 +246,18 @@ function pintarCco() {
     g.fillText(p.nombre.slice(0, 70), 40 + (p.sintoma ? 30 : 0), 207 + i * 34);
   });
   mundo.cco.pared.tex.needsUpdate = true;
+  pintarSala();
+}
+
+// pantallas de la sala de control: los mismos datos de Zabbix que el centro de mando (/api/zabbix)
+let zdatos = null;
+async function pintarSala() {
+  try { zdatos = await (await fetch('/api/zabbix', { cache: 'no-store' })).json(); } catch (e) { /* usa lo último */ }
+  const [p1, p2, p3] = mundo.cco.sala.pantallas;
+  const dibujar = (pt, fn, datos) => { fn(pt.canvas.getContext('2d'), pt.canvas.width, pt.canvas.height, datos); pt.tex.needsUpdate = true; };
+  dibujar(p1, pantallas.problemas, zdatos);
+  dibujar(p2, pantallas.graficos, zdatos);
+  dibujar(p3, pantallas.peajes, estado);
 }
 
 // ---------- lluvia
@@ -310,7 +343,7 @@ function ciclo(ahora) {
 }
 requestAnimationFrame(ciclo);
 window.addEventListener('keydown', (e) => {
-  const atajos = { v: 'vegachi', s: 'sis', p: 'pbe', a: 'accidente', c: 'corredor', d: 'dolores', f: 'fibra', o: 'cco', x: 'seguir' };
+  const atajos = { v: 'vegachi', s: 'sis', p: 'pbe', a: 'accidente', c: 'corredor', d: 'dolores', f: 'fibra', o: 'sala', x: 'seguir' };
   if (e.target.tagName !== 'SELECT' && atajos[e.key.toLowerCase()] && !e.metaKey && !e.ctrlKey) ir(atajos[e.key.toLowerCase()]);
 });
 void ultimoPoll;

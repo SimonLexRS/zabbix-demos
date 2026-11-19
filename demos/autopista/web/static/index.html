@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Autopista Río Magdalena · Zabbix 8.0</title>
+<title>Autopista · Zabbix 8.0</title>
 <link rel="stylesheet" href="/static/css/hud.css">
 <script type="importmap">
 { "imports": { "three": "/static/vendor/three.module.js", "three/addons/": "/static/vendor/addons/" } }
@@ -14,7 +14,7 @@
 <div id="etiquetas"></div>
 
 <header id="kpis">
-  <div class="marca"><b>ZABBIX</b> 8.0 · Autopista Río Magdalena<small><span id="reloj">--:--</span> · <span id="conexion">conectando…</span></small></div>
+  <div class="marca"><b>ZABBIX</b> 8.0 · Autopista demo<small><span id="reloj">--:--</span> · <span id="conexion">conectando…</span></small></div>
   <div class="kpi" data-k="vehiculos"><span>Vehículos en el corredor</span><strong>—</strong></div>
   <div class="kpi" data-k="flujo_h"><span>Ingreso (veh/h)</span><strong>—</strong></div>
   <div class="kpi" data-k="velocidad"><span>Velocidad media</span><strong>—</strong></div>
@@ -40,6 +40,7 @@
   <div class="grupo" id="escenarios"><b>FALLAS</b></div>
   <div class="grupo derecha">
     <select id="ir" title="Ir a"></select>
+    <div id="enlaces"><a href="/cco" target="_blank">Centro de mando ↗</a><a href="/peaje" target="_blank">App de peajes ↗</a></div>
     <a id="dashboard" target="_blank" rel="noopener" hidden>Dashboard en Zabbix ↗</a>
     <div id="velocidad"></div>
   </div>

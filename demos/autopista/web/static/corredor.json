@@ -1,6 +1,6 @@
 {
-  "_nota": "Modelo del corredor Autopista Río Magdalena, compartido por sim/simulador.py y la escena 3D. Abscisa s en km desde Remedios. Longitudes de UF, peajes y tarifas: sitio de la concesión. Trazado, ubicación de plazas, CCO y equipos ITS: aproximados para la demo.",
-  "nombre": "Autopista Río Magdalena",
+  "_nota": "Modelo del corredor de la demo, compartido por sim/simulador.py y la escena 3D. Abscisa s en km desde Remedios. Longitudes de UF, peajes y tarifas inspirados en un corredor real. Trazado, ubicación de plazas, CCO y equipos ITS: aproximados para la demo.",
+  "nombre": "Autopista demo",
   "longitud": 153.3,
   "sentidos": {
     "A": {"nombre": "Remedios → Pto. Berrío", "corto": "hacia Pto. Berrío"},
