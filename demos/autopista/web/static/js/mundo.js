@@ -13,7 +13,8 @@ function cinta(cor, desde, hasta, paso, anchoFn, latFn = () => 0, y = Y_VIA) {
     const c = latFn(s);
     cor.marco(s, c + a, m); pos.push(m.x, y, m.z);
     cor.marco(s, c + b, m); pos.push(m.x, y, m.z);
-    if (n) idx.push(2 * n - 2, 2 * n, 2 * n - 1, 2 * n - 1, 2 * n, 2 * n + 1);
+    // orden antihorario visto desde arriba: la normal queda hacia +Y y la cara no se descarta
+    if (n) idx.push(2 * n - 2, 2 * n - 1, 2 * n, 2 * n - 1, 2 * n + 1, 2 * n);
     n++;
   }
   const g = new THREE.BufferGeometry();

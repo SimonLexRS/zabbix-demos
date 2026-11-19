@@ -78,9 +78,10 @@ def comprobaciones():
                 ("Autopista - ITS dai-k099", "its.en_linea", 30, "datos ITS"),
                 ("Autopista - Recaudo", "arm.kpi.get", 120, "KPI de recaudo desde las trazas"),
                 ("Autopista - Recaudo", "arm.apm.gateway.total", 120, "APM (Telemetry query)")):
-            i = api("item.get", {"output": ["lastclock"], "host": host, "filter": {"key_": [clave]}})
+            i = api("item.get", {"output": ["lastclock", "error", "state"], "host": host, "filter": {"key_": [clave]}})
             edad = time.time() - int(i[0]["lastclock"]) if i and i[0]["lastclock"] != "0" else float("inf")
-            informe(edad < maximo, f"{etiqueta} al día (hace {edad:.0f} s)")
+            error = (i[0].get("error") or "")[:300] if i else "ítem inexistente"
+            informe(edad < maximo, f"{etiqueta} al día (hace {edad:.0f} s)" + (f" · error: {error}" if edad >= maximo and error else ""))
         r = api("ceprule.get", {"output": ["name", "status", "error"], "filter": {"name": REGLAS}})
         informe(len(r) == len(REGLAS) and all(x["status"] == "0" and not x.get("error") for x in r), f"reglas CEP activas ({len(r)}/{len(REGLAS)})")
         abiertos = api("problem.get", {"output": ["name"], "tags": [{"tag": "demo", "value": "autopista", "operator": 1}], "severities": [2, 3, 4, 5]})
