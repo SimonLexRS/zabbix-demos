@@ -1,70 +1,38 @@
-// Vehículos del corredor: InstancedMesh por modelo, interpolados sobre el estado que manda el simulador.
-// Cada vehículo llega como [id, s_km, lat_m, v_m/s (con signo del sentido), categoría, modo]; entre sondeos se
-// extrapola con su velocidad (y la velocidad de la simulación) y se corrige suave hacia el último dato.
+// Vehículos del corredor: tres InstancedMesh por variante (carrocería con el color de cada vehículo, detalles y luces),
+// interpolados sobre el estado que manda el simulador. Cada vehículo llega como
+// [id, s_km, lat_m, v_m/s (con signo del sentido), categoría, modo]; entre sondeos se extrapola con su velocidad
+// (y la velocidad de la simulación) y se corrige suave hacia el último dato.
 import * as THREE from 'three';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { VARIANTES, PINTURA } from './modelos.js';
 
 const Y = 0.35;
-const MAX = 1400;
-
-function caja(w, h, l, x = 0, y = 0, z = 0) {
-  const g = new THREE.BoxGeometry(w, h, l);
-  g.translate(x, y + h / 2, z);
-  return g;
-}
-
-function pintar(g, color) {
-  const n = g.attributes.position.count, c = new Float32Array(n * 3), col = new THREE.Color(color);
-  for (let i = 0; i < n; i++) col.toArray(c, i * 3);
-  g.setAttribute('color', new THREE.BufferAttribute(c, 3));
-  return g;
-}
-
-// Geometrías orientadas hacia +z (adelante). La carrocería usa el color de la instancia; vidrios y ruedas, color fijo.
-const MODELOS = {
-  auto: () => mergeGeometries([
-    pintar(caja(1.75, 0.75, 4.3, 0, 0.35), 0xffffff), pintar(caja(1.55, 0.6, 2.2, 0, 1.1, -0.2), 0x9fb6c9),
-    pintar(caja(1.8, 0.45, 0.6, 0, 0.12, 1.3), 0x222222), pintar(caja(1.8, 0.45, 0.6, 0, 0.12, -1.3), 0x222222)]),
-  bus: () => mergeGeometries([
-    pintar(caja(2.5, 2.6, 10, 0, 0.45), 0xffffff), pintar(caja(2.55, 0.9, 9.4, 0, 1.6), 0x7c9bb5),
-    pintar(caja(2.6, 0.6, 1, 0, 0.1, 3.4), 0x222222), pintar(caja(2.6, 0.6, 1, 0, 0.1, -3.4), 0x222222)]),
-  camion: () => mergeGeometries([
-    pintar(caja(2.3, 2.1, 1.9, 0, 0.6, 2.4), 0xffffff), pintar(caja(2.4, 2.6, 5, 0, 0.75, -1.2), 0xe6e1d3),
-    pintar(caja(2.4, 0.7, 0.9, 0, 0.1, 2.5), 0x222222), pintar(caja(2.4, 0.7, 0.9, 0, 0.1, -2.6), 0x222222)]),
-  camion3: () => mergeGeometries([
-    pintar(caja(2.4, 2.3, 2.1, 0, 0.7, 4.8), 0xffffff), pintar(caja(2.5, 2.9, 8.8, 0, 0.85, -0.8), 0xd9d4c7),
-    pintar(caja(2.5, 0.8, 0.9, 0, 0.1, 4.9), 0x222222), pintar(caja(2.5, 0.8, 2.2, 0, 0.1, -3.5), 0x222222)]),
-  tracto: () => mergeGeometries([
-    pintar(caja(2.5, 2.6, 2.6, 0, 0.8, 7.3), 0xffffff), pintar(caja(2.55, 3.1, 13.6, 0, 1.0, -1.7), 0xcfd6dc),
-    pintar(caja(2.5, 0.9, 2.3, 0, 0.1, 7.3), 0x222222), pintar(caja(2.6, 0.9, 3.2, 0, 0.1, -6.6), 0x222222)]),
-};
-
-const COLORES = {
-  auto: [0xd6dde4, 0x1f2a36, 0xb03a2e, 0x2e5c9a, 0xf2f2f2, 0x8a8f94, 0x2d6a4f, 0xc0a062],
-  bus: [0x1f6fb2, 0xd94f30, 0x2a9d8f, 0xf2b134],
-  camion: [0xd62828, 0x1d3557, 0xf4a261, 0x457b9d, 0xffffff],
-  camion3: [0x9d0208, 0x264653, 0xe9c46a, 0x2a9d8f, 0xffffff],
-  tracto: [0xb5179e, 0x3a0ca3, 0xd00000, 0x14213d, 0xfca311, 0xe5e5e5],
-};
-const PUNTO = { auto: 0xffffff, bus: 0x49c6ff, camion: 0xffd166, camion3: 0xffa94d, tracto: 0xff7b54 };
+const MAX = 900;
+const PUNTO = { 1: 0xffffff, 2: 0x49c6ff, 3: 0xffd166, 4: 0xffd166, 5: 0xffa94d, 6: 0xff7b54, 7: 0xff7b54 };
 
 export class Vehiculos {
-  constructor(scene, cor, categorias) {
+  constructor(scene, cor) {
     this.cor = cor;
-    this.cat = categorias;
-    this.mallas = {};
-    const mat = new THREE.MeshLambertMaterial({ vertexColors: true });
-    for (const [nombre, fab] of Object.entries(MODELOS)) {
-      const im = new THREE.InstancedMesh(fab(), mat, MAX);
-      im.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-      im.frustumCulled = false;
-      im.count = 0;
-      scene.add(im);
-      this.mallas[nombre] = im;
+    this.variantes = {};
+    const pintura = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.38, metalness: 0.35, envMapIntensity: 0.9 });
+    const detalle = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.62, metalness: 0.15, envMapIntensity: 0.6 });
+    const luz = new THREE.MeshBasicMaterial({ vertexColors: true });
+    for (const lista of Object.values(VARIANTES)) {
+      for (const [nombre, fabricar] of lista) {
+        const g = fabricar();
+        const capa = (geo, mat) => {
+          const im = new THREE.InstancedMesh(geo, mat, MAX);
+          im.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+          im.frustumCulled = false;
+          im.count = 0;
+          scene.add(im);
+          return im;
+        };
+        this.variantes[nombre] = { carroceria: capa(g.carroceria, pintura), detalles: capa(g.detalles, detalle), luces: capa(g.luces, luz) };
+      }
     }
     // vista lejana: un punto por vehículo
-    this.pPos = new Float32Array(MAX * 3 * 2);
-    this.pCol = new Float32Array(MAX * 3 * 2);
+    this.pPos = new Float32Array(MAX * 3 * 3);
+    this.pCol = new Float32Array(MAX * 3 * 3);
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(this.pPos, 3).setUsage(THREE.DynamicDrawUsage));
     g.setAttribute('color', new THREE.BufferAttribute(this.pCol, 3).setUsage(THREE.DynamicDrawUsage));
@@ -78,15 +46,21 @@ export class Vehiculos {
     this.m = {};
   }
 
+  elegir(id, cat) {
+    const lista = VARIANTES[cat] || VARIANTES[1];
+    let r = ((id * 2654435761) % 1000) / 1000, nombre = lista[0][0];
+    for (const [n, , peso] of lista) { if (r < peso) { nombre = n; break; } r -= peso; }
+    const paleta = PINTURA[nombre];
+    return { variante: nombre, color: paleta[(id * 7919) % paleta.length] };
+  }
+
   actualizar(lista) {
     const vivos = new Set();
     for (const [id, s, lat, v, cat, modo] of lista) {
       vivos.add(id);
       let e = this.v.get(id);
       if (!e) {
-        const modelo = this.cat[cat]?.modelo || 'auto';
-        const paleta = COLORES[modelo];
-        e = { s, lat, v, cat, modelo, color: paleta[(id * 7919) % paleta.length], ds: 0, dl: 0, ss: s, ll: lat };
+        e = { s, lat, v, cat, ds: 0, dl: 0, ss: s, ll: lat, ...this.elegir(id, cat) };
         this.v.set(id, e);
       }
       // error entre lo que mostramos y el dato nuevo: se absorbe en ~0,5 s
@@ -97,9 +71,9 @@ export class Vehiculos {
     for (const id of this.v.keys()) if (!vivos.has(id)) this.v.delete(id);
   }
 
-  dibujar(dt, velocidad, lejos) {
+  dibujar(dt, velocidad, lejos, noche = 0) {
     const cuenta = {};
-    for (const k in this.mallas) cuenta[k] = 0;
+    for (const k in this.variantes) cuenta[k] = 0;
     const amort = Math.exp(-dt * 5);
     let p = 0;
     for (const e of this.v.values()) {
@@ -107,22 +81,29 @@ export class Vehiculos {
       e.ds *= amort; e.dl *= amort;
       e.ss = e.s + e.ds; e.ll = e.lat + e.dl;
       const f = this.cor.marco(e.ss, e.ll, this.m);
-      const k = e.modelo, i = cuenta[k]++;
       if (!lejos) {
+        const capas = this.variantes[e.variante], i = cuenta[e.variante]++;
         this.o.position.set(f.x, Y, f.z);
         this.o.rotation.set(0, f.rumbo + (e.v < 0 || (e.v === 0 && e.ll < 0) ? Math.PI : 0), 0);
         this.o.updateMatrix();
-        this.mallas[k].setMatrixAt(i, this.o.matrix);
-        this.mallas[k].setColorAt(i, this.c.set(e.color));
+        capas.carroceria.setMatrixAt(i, this.o.matrix);
+        capas.detalles.setMatrixAt(i, this.o.matrix);
+        capas.luces.setMatrixAt(i, this.o.matrix);
+        capas.carroceria.setColorAt(i, this.c.set(e.color));
+        // luces: tenues de día, encendidas de noche; los stops se encienden con el vehículo detenido
+        const brillo = Math.abs(e.v) < 1 ? 1 : 0.35 + 0.65 * noche;
+        capas.luces.setColorAt(i, this.c.setScalar(brillo));
       }
       this.pPos[p * 3] = f.x; this.pPos[p * 3 + 1] = 6; this.pPos[p * 3 + 2] = f.z;
-      this.c.set(PUNTO[k]).toArray(this.pCol, p * 3);
+      this.c.set(PUNTO[e.cat] || 0xffffff).toArray(this.pCol, p * 3);
       p++;
     }
-    for (const [k, im] of Object.entries(this.mallas)) {
-      im.count = lejos ? 0 : cuenta[k];
-      im.instanceMatrix.needsUpdate = true;
-      if (im.instanceColor) im.instanceColor.needsUpdate = true;
+    for (const [k, capas] of Object.entries(this.variantes)) {
+      for (const im of Object.values(capas)) {
+        im.count = lejos ? 0 : cuenta[k];
+        im.instanceMatrix.needsUpdate = true;
+        if (im.instanceColor) im.instanceColor.needsUpdate = true;
+      }
     }
     this.puntos.geometry.setDrawRange(0, p);
     this.puntos.geometry.attributes.position.needsUpdate = true;

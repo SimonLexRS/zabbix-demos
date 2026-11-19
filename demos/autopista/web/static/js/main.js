@@ -1,6 +1,7 @@
 // Escena principal: render, cámara, etiquetas y vínculo con el backend (/api/estado cada 0,5 s).
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { Corredor } from './corredor.js';
 import { construirMundo } from './mundo.js';
 import { Vehiculos, Unidades } from './vehiculos.js';
@@ -20,6 +21,9 @@ const scene = new THREE.Scene();
 const CIELO_DIA = new THREE.Color(0xa9cfe8), CIELO_NOCHE = new THREE.Color(0x0a1424), CIELO_LLUVIA = new THREE.Color(0x7d8a96);
 scene.background = CIELO_DIA.clone();
 scene.fog = new THREE.Fog(scene.background, 2000, 120000);
+// reflejos suaves para la pintura de los vehículos
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.6;
 const hemi = new THREE.HemisphereLight(0xdfefff, 0x3a4a2a, 1.3);
 const sol = new THREE.DirectionalLight(0xfff1d6, 2.2);
 sol.position.set(30000, 60000, 20000);
@@ -32,7 +36,8 @@ orbita.maxPolarAngle = Math.PI * 0.47; orbita.minDistance = 25; orbita.maxDistan
 orbita.screenSpacePanning = false;
 
 const mundo = construirMundo(scene, cor);
-const vehiculos = new Vehiculos(scene, cor, datos.categorias);
+const vehiculos = new Vehiculos(scene, cor);
+let noche = 0;
 const unidades = new Unidades(scene, cor);
 
 // ---------- lugares
@@ -236,7 +241,7 @@ function ciclo(ahora) {
   const dist = camara.position.distanceTo(orbita.target);
   const lejos = dist > 3500;
   const vel = estado ? estado.velocidad : 1;
-  vehiculos.dibujar(dt, vel, lejos);
+  vehiculos.dibujar(dt, vel, lejos, noche);
   unidades.dibujar(dt);
   mundo.traza.visible = dist > 2500;
   // barreras (animadas con el último dato del simulador) y baliza del accidente
@@ -259,6 +264,8 @@ function ciclo(ahora) {
     const ll = estado.lluvia * THREE.MathUtils.clamp(1 - orbita.target.distanceTo(zonaLluvia) / 12000, 0, 1);
     cTmp.copy(CIELO_NOCHE).lerp(CIELO_DIA, luzDia).lerp(CIELO_LLUVIA, ll * 0.7);
     scene.background.copy(cTmp); scene.fog.color.copy(cTmp);
+    noche = 1 - luzDia;
+    scene.environmentIntensity = 0.15 + 0.5 * luzDia;
     hemi.intensity = 0.25 + 1.05 * luzDia; sol.intensity = 0.1 + 2.1 * luzDia * (1 - ll * 0.6);
     lluvia.visible = ll > 0.05 && dist < 3000;
     if (lluvia.visible) {
